@@ -4,42 +4,27 @@ import { Card } from './components/ui/card';
 import { Badge } from './components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from './components/ui/sheet';
 import { 
-  Home, 
-  User, 
-  Briefcase, 
-  Mail, 
-  Github, 
-  Linkedin, 
-  BarChart3,
-  Code,
-  ShoppingCart,
-  Ship,
-  Building,
-  PieChart,
-  ExternalLink,
-  Download,
-  ChevronRight,
-  Database,
-  TrendingUp,
-  Globe,
-  ArrowLeft,
-  Phone,
-  Languages,
-  Monitor,
-  Users,
-  AlertTriangle,
-  ChartBar,
-  Eye,
-  Truck,
-  Sword,
-  Flame,
-  Headphones,
-  Copy,
-  Play,
-  Menu,
-  X,
-  GraduationCap,
-  Award
+  Home, 
+  User, 
+  Briefcase, 
+  Mail, 
+  Github, 
+  Linkedin, 
+  BarChart3,
+  Code,
+  ShoppingCart,
+  Ship,
+  ExternalLink,
+  Download,
+  ChevronRight,
+  Database,
+  TrendingUp,
+  Phone,
+  Play,
+  Menu,
+  GraduationCap,
+  Award,
+  FileText
 } from 'lucide-react';
 import ProjectSupermarket from './components/ProjectSupermarket';
 import ProjectLookerStudio from './components/ProjectLookerStudio';
@@ -48,773 +33,390 @@ import PROJECTADIDAS from './components/PROJECTADIDAS';
 // Import de la photo de profil
 import profileImage from './assets/unnamed.png';
 
-
 type Language = 'en';
 type Page = 'home' | 'about' | 'projects' | 'contact' | 'project-detail';
 
 const translations = {
-  en: {
-    nav: {
-      home: 'Home',
-      about: 'About',
-      projects: 'Projects',
-      contact: 'Contact',
-      menu: 'Menu'
-    },
-    home: {
-      title: 'Yousef Yousry',
-      subtitle: 'Data Analyst Specialized in Power BI',
-      description: 'Passionate about data analysis, I transform complex data into strategic insights to optimize business performance through advanced analytics and impactful visualizations.',
-      status: 'Data Analyst',
-      traits: 'Curious • Organized • Rigorous • Always ready to learn',
-      viewProjects: 'View my projects',
-      runCode: 'Run code',
-      whoIAm: 'Who I am',
-      dataAnalysis: 'Data Analysis',
-      dataAnalysisDesc: 'Statistical analysis, predictive modeling and business insights',
-      dataViz: 'Data Visualization',
-      dataVizDesc: 'Interactive dashboards, reporting and data storytelling',
-      consulting: 'Data Consulting',
-      consultingDesc: 'Data strategy, process optimization and decision support',
-      projectsCompleted: 'Projects completed',
-      dataProcessed: 'Data processed',
-      dashboards: 'Dashboards created',
-      experience: 'Less than 1 years experience'
-    },
-    about: {
-      title: 'About Me',
-      subtitle: 'Data Analyst passionate about innovation and business optimization',
-      journey: 'My Journey',
-      journeyText1: 'As a Computer Science and Information Systems graduate, I have a strong technical background in managing and analyzing data. I love turning complex numbers into clear charts and useful stories.',
-      journeyText2: 'My experience includes working with data in different fields like e-commerce and logistics. I use tools like Power BI, SQL, and Python to build interactive dashboards that help companies understand their performance and make better decisions.',
-      journeyText3: 'My goal is to help companies make informed decisions through rigorous analysis and clear, actionable visualizations.',
-      expertise: 'Areas of Expertise',
-      technical: 'Technical',
-      business: 'Business',
-      skills: 'Technical Skills',
-      languages: 'Languages',
-      education: 'Education ',
-      certifications: 'DataScientest Certifications',
-      arabic: 'Arabic',
-      english: 'English',
-      Mother_Tongue: 'Mother Tongue',
-      fluent: 'Intermediate',
-      experience: 'Professional Experience',
-      freelanceTitle: 'Freelance Data Analyst',
-      freelancePeriod: '2023 - Present',
-      freelanceDesc: 'Supporting companies in their data projects: creating interactive dashboards, predictive analysis and automated reporting to optimize business performance.'
-    },
-    projects: {
-      title: 'My Projects',
-      subtitle: 'A selection of my achievements in data analysis',
-      viewDetails: 'View details',
-      backToProjects: 'Back to projects',
-      technologies: 'Technologies',
-      results: 'Results',
-      code: 'Code',
-      demo: 'Demo'
-    },
-    contact: {
-      title: 'Contact',
-      subtitle: 'Let\'s discuss your data projects',
-      contactMe: 'Contact me',
-      email: 'Email',
-      phone: 'Phone',
-      linkedin: 'LinkedIn',
-      services: 'Services Offered',
-      dataAnalysis: 'Data Analysis',
-      dataAnalysisDesc: 'Data exploration, cleaning and statistical analysis',
-      dashboardsReporting: 'Dashboards & Reporting',
-      dashboardsReportingDesc: 'Interactive dashboards and automated reports creation',
-      discussProject: 'Discuss your project'
-    }
-  }
+  en: {
+    nav: {
+      home: 'Home',
+      about: 'About',
+      projects: 'Projects',
+      contact: 'Contact',
+      menu: 'Menu'
+    },
+    home: {
+      title: 'Yousef Yousry',
+      subtitle: 'Data Analyst Specialized in Power BI',
+      description: 'Passionate about data analysis, I transform complex data into strategic insights to optimize business performance through advanced analytics and impactful visualizations.',
+      status: 'Data Analyst',
+      traits: 'Curious • Organized • Rigorous • Always ready to learn',
+      viewProjects: 'View my projects',
+      downloadCV: 'Download Resume',
+      runCode: 'Run code',
+      dataAnalysis: 'Data Analysis',
+      dataViz: 'Data Visualization',
+      consulting: 'Data Consulting',
+      projectsCompleted: 'Projects completed',
+      dashboards: 'Dashboards created',
+      experience: 'Less than 1 years experience'
+    },
+    about: {
+      title: 'About Me',
+      subtitle: 'Data Analyst passionate about innovation and business optimization',
+      journey: 'My Journey',
+      journeyText1: 'As a Computer Science and Information Systems graduate, I have a strong technical background in managing and analyzing data. I love turning complex numbers into clear charts and useful stories.',
+      journeyText2: 'My experience includes working with data in different fields like e-commerce and logistics. I use tools like Power BI, SQL, and Python to build interactive dashboards that help companies understand their performance and make better decisions.',
+      journeyText3: 'My goal is to help companies make informed decisions through rigorous analysis and clear, actionable visualizations.',
+      expertise: 'Areas of Expertise',
+      technical: 'Technical',
+      business: 'Business',
+      skills: 'Technical Skills',
+      languages: 'Languages',
+      education: 'Education ',
+      certifications: 'Certifications',
+      arabic: 'Arabic',
+      english: 'English',
+      Mother_Tongue: 'Mother Tongue',
+      fluent: 'Intermediate'
+    },
+    projects: {
+      title: 'My Projects',
+      subtitle: 'A selection of my achievements in data analysis',
+      viewDetails: 'View details',
+      backToProjects: 'Back to projects',
+      technologies: 'Technologies',
+      results: 'Results'
+    },
+    contact: {
+      title: 'Contact',
+      subtitle: "Let's discuss your data projects",
+      contactMe: 'Contact me',
+      email: 'Email',
+      phone: 'Phone',
+      linkedin: 'LinkedIn',
+      services: 'Services Offered',
+      discussProject: 'Discuss your project'
+    }
+  }
 };
 
-// Projects - All content in English only
 const projects = [
-  {
-    id: 'looker',
-    title: 'Game of Thrones Analysis',
-    category: 'BI',
-    description: 'Development of Power BI reports for Game of Thrones performance analysis with dynamic visualizations and narrative KPIs.',
-    tech: [
-'Power BI',
-'DAX',
-'Advanced Data Modeling'
-],
-    metrics: [
-'Series Performance KPIs',
-'Dynamic Narrative Filters',
-'Cross-Seasonal Trend Analysis'
-],
-    image: 'https://i.ibb.co/bgKX2kH6/815c1250ff6db53e8455e98739f9f628.jpg',
-    icon: Sword
-  },
-  
-  {
-  id: 'adidas-tableau',
-  title: 'Adidas US Sales Analysis',
-  category: 'BI & Data Analytics',
-  description: 'Advanced Tableau dashboard analyzing $61M+ in sales data, featuring regional performance heatmaps and retailer profitability insights.',
-  tech: ['Tableau', 'Tableau Prep', 'LOD Expressions', 'Calculated Fields', 'Excel'],
-  metrics: [
-    'Total Sales: $61.1M',
-    'Profit Margin: 35%',
-    'Retailer Benchmarking',
-    'Geographic Mapping'
-  ],
-    image: 'https://i.ibb.co/BHfmYpvH/image.jpg',
-    icon: ShoppingCart
-  },
-  
-  {
-    id: 'supermarket',
-    title: 'Global Sales & Logistics Dashboard',
-    category: 'Supply Chain Analytics',
-    description: 'A comprehensive performance dashboard analyzing global orders, logistics status, and product line profitability across 19+ countries.',
-  tech: ['Power BI', 'Excel', 'Data Cleaning', 'Trend Analysis'],
-    metrics: [
-    'Order Status Tracking',
-    'Revenue by Territory',
-    'Customer Segmentation',
-    'Product Line Performance'
-  ],
-    image: 'https://i.ibb.co/CRG14nw/9a0c027694a7b25c293fa83b1abc061b.jpg',
-    icon: Ship
-  },
-  
+  {
+    id: 'looker',
+    title: 'Game of Thrones Analysis',
+    category: 'BI',
+    description: 'Development of Power BI reports for Game of Thrones performance analysis with dynamic visualizations and narrative KPIs.',
+    tech: ['Power BI', 'DAX', 'Advanced Data Modeling'],
+    metrics: ['Series Performance KPIs', 'Dynamic Narrative Filters', 'Cross-Seasonal Trend Analysis'],
+    image: 'https://i.ibb.co/bgKX2kH6/815c1250ff6db53e8455e98739f9f628.jpg',
+    icon: BarChart3
+  },
+  {
+    id: 'adidas-tableau',
+    title: 'Adidas US Sales Analysis',
+    category: 'BI & Data Analytics',
+    description: 'Advanced Tableau dashboard analyzing $61M+ in sales data, featuring regional performance heatmaps and retailer profitability insights.',
+    tech: ['Tableau', 'Tableau Prep', 'LOD Expressions', 'Calculated Fields', 'Excel'],
+    metrics: ['Total Sales: $61.1M', 'Profit Margin: 35%', 'Retailer Benchmarking'],
+    image: 'https://i.ibb.co/BHfmYpvH/image.jpg',
+    icon: ShoppingCart
+  },
+  {
+    id: 'supermarket',
+    title: 'Global Sales & Logistics Dashboard',
+    category: 'Supply Chain Analytics',
+    description: 'A comprehensive performance dashboard analyzing global orders, logistics status, and product line profitability across 19+ countries.',
+    tech: ['Power BI', 'Excel', 'Data Cleaning', 'Trend Analysis'],
+    metrics: ['Order Status Tracking', 'Revenue by Territory', 'Customer Segmentation'],
+    image: 'https://i.ibb.co/CRG14nw/9a0c027694a7b25c293fa83b1abc061b.jpg',
+    icon: Ship
+  },
 ];
 
-// Compétences techniques avec logos - ajout des nouvelles compétences
 const technicalSkills = [
-  { name: 'Power BI', icon: '📊' },
-  { name: 'Excel', icon: '📈' },
-  { name: 'SQL', icon: '🗄️' },
-  { name: 'Figma', icon: '🎨' },
-  { name: 'Python', icon: '🐍' },
-  { name: 'Statistics', icon: '📈' },
-  { name: 'Matplotlib', icon: '📉' },
-  { name: 'Pandas', icon: '📊' }
+  { name: 'Power BI', icon: '📊' },
+  { name: 'Excel', icon: '📈' },
+  { name: 'SQL', icon: '🗄️' },
+  { name: 'Figma', icon: '🎨' },
+  { name: 'Python', icon: '🐍' },
+  { name: 'Statistics', icon: '📈' },
+  { name: 'Matplotlib', icon: '📉' },
+  { name: 'Pandas', icon: '📊' }
 ];
 
-// Diplômes et formations
 const educationData = {
-  degrees: [
-    {
-      title: { en: 'Bachelor\'s Computer and Information Science' },
-      level: {  en: 'Bachelor\'s Degree' },
-      description: { en: 'Information Systems Department' }
-    },
-  ],
-  certifications: [
-    {
-      name: 'Introduction to SQL',
-      url: 'https://drive.google.com/file/d/1q-7Iyst_ABVEuZANVii44dsLH2VO3Xub/view?usp=sharing'
-    },
-    {
-      name: 'Intermediate to SQL',
-      url: 'https://drive.google.com/file/d/1pv5pLxQbsoJ_laosoLBBLObGdO58Rd0h/view?usp=sharing'
-
-    },
-    {
-      name: 'Joining Data in SQL',
-      url: 'https://drive.google.com/file/d/1ptNXyOo8LGhJY2yng56UojrEJWEQq8Rt/view?usp=sharing'
-    },
-    {
-      name: 'Introduction to Python',
-      url: 'https://drive.google.com/file/d/1HvzZeotMPRc-0qn3A5xNIomjlaS8JPS7/view?usp=sharing'
-    },
-    {
-      name: 'Intermediate Python',
-      url: 'https://drive.google.com/file/d/1mkSOSmnhMqutdpe-9WZ_BxIXNIgcMuZi/view?usp=sharing'
-    },
-    {
-      name: 'Data Manipulation with pandas',
-      url: 'https://drive.google.com/file/d/1ITKp9ErKKPqSGYNv0jXsJC3ZXPk4a4cU/view?usp=sharing'
-    },
-    {
-      name: 'BI Development — ITI',
-    },
-  ]
+  degrees: [
+    {
+      title: { en: 'Bachelor\'s Computer and Information Science' },
+      level: { en: 'Bachelor\'s Degree' },
+      description: { en: 'Information Systems Department' }
+    }
+  ],
+  certifications: [
+    { name: 'Introduction to SQL', url: 'https://drive.google.com/file/d/1q-7Iyst_ABVEuZANVii44dsLH2VO3Xub/view?usp=sharing' },
+    { name: 'Intermediate to SQL', url: 'https://drive.google.com/file/d/1pv5pLxQbsoJ_laosoLBBLObGdO58Rd0h/view?usp=sharing' },
+    { name: 'Joining Data in SQL', url: 'https://drive.google.com/file/d/1ptNXyOo8LGhJY2yng56UojrEJWEQq8Rt/view?usp=sharing' },
+    { name: 'Introduction to Python', url: 'https://drive.google.com/file/d/1HvzZeotMPRc-0qn3A5xNIomjlaS8JPS7/view?usp=sharing' },
+    { name: 'Intermediate Python', url: 'https://drive.google.com/file/d/1mkSOSmnhMqutdpe-9WZ_BxIXNIgcMuZi/view?usp=sharing' },
+    { name: 'Data Manipulation with pandas', url: 'https://drive.google.com/file/d/1ITKp9ErKKPqSGYNv0jXsJC3ZXPk4a4cU/view?usp=sharing' },
+    { name: 'BI Development — ITI', url: 'https://www.linkedin.com/posts/yousef-yousry_businessintelligence-sql-dataanalytics-activity-7244027804260986880-OWrI?utm_source=share&utm_medium=member_desktop&rcm=ACoAADwOVmUBukXRW48ZiY1UAGIywreeNyw-wjc' },
+  ]
 };
 
 export default function App() {
-  const [activePage, setActivePage] = useState<Page>('home');
-  const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const [language, setLanguage] = useState<Language>('en');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activePage, setActivePage] = useState<Page>('home');
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [language] = useState<Language>('en');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const t = translations[language];
+  const t = translations[language];
 
-  const navigation = [
-    { id: 'home' as Page, label: t.nav.home, icon: Home },
-    { id: 'about' as Page, label: t.nav.about, icon: User },
-    { id: 'projects' as Page, label: t.nav.projects, icon: Briefcase },
-    { id: 'contact' as Page, label: t.nav.contact, icon: Mail }
-  ];
+  const navigation = [
+    { id: 'home' as Page, label: t.nav.home, icon: Home },
+    { id: 'about' as Page, label: t.nav.about, icon: User },
+    { id: 'projects' as Page, label: t.nav.projects, icon: Briefcase },
+    { id: 'contact' as Page, label: t.nav.contact, icon: Mail }
+  ];
 
-  const getCategoryIcon = (projectId: string) => {
-    const project = projects.find(p => p.id === projectId);
-    return project?.icon || BarChart3;
-  };
+  const navigateToPage = (page: Page) => {
+    setActivePage(page);
+    setSelectedProject(null);
+    setMobileMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
 
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'Application': return 'bg-blue-100 text-blue-700';
-      case 'BI': return 'bg-orange-100 text-orange-700';
-      case 'Jupyter Notebook': return 'bg-purple-100 text-purple-700';
-      case 'Site Web':
-      case 'Website': return 'bg-green-100 text-green-700';
-      default: return 'bg-gray-100 text-gray-700';
-    }
-  };
+  const renderHome = () => (
+    <div className="space-y-16 animate-in fade-in duration-700">
+      <div className="text-center space-y-6 pt-12 sm:pt-20">
+        <div className="w-50 h-50 rounded-full mx-auto overflow-hidden border-4 border-primary/10 shadow-xl">
+          <img src={profileImage} alt="Yousef Yousry" className="w-full h-full object-cover" />
+        </div>
+        <div className="px-4">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            {t.home.title}
+          </h1>
+          <p className="text-xl sm:text-2xl text-muted-foreground font-medium mb-2">{t.home.subtitle}</p>
+          <p className="text-sm sm:text-base text-muted-foreground italic mb-8 max-w-2xl mx-auto">{t.home.traits}</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button onClick={() => navigateToPage('projects')} size="lg" className="gap-2 shadow-lg hover:scale-105 transition-transform">
+              {t.home.viewProjects} <ChevronRight className="w-4 h-4" />
+            </Button>
+            <Button variant="outline" size="lg" className="gap-2" asChild>
+  <a 
+    href="https://drive.google.com/file/d/1LFr9T41b1zOS6p4G8ClnPR_6xispa4z6/view?usp=sharing" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <Download className="w-4 h-4" /> {t.home.downloadCV}
+  </a>
+</Button>
+          </div>
+        </div>
+      </div>
 
-  const openProject = (projectId: string) => {
-    setSelectedProject(projectId);
-    setActivePage('project-detail');
-  };
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 sm:px-0">
+        <Card className="p-6 text-center hover:shadow-md transition-all border-none bg-secondary/30">
+          <BarChart3 className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+          <h3 className="text-lg font-bold mb-2">{t.home.dataAnalysis}</h3>
+          <p className="text-sm text-muted-foreground">Statistical analysis and business insights</p>
+        </Card>
+        <Card className="p-6 text-center hover:shadow-md transition-all border-none bg-secondary/30">
+          <TrendingUp className="w-12 h-12 text-green-600 mx-auto mb-4" />
+          <h3 className="text-lg font-bold mb-2">{t.home.dataViz}</h3>
+          <p className="text-sm text-muted-foreground">Interactive dashboards and storytelling</p>
+        </Card>
+        <Card className="p-6 text-center hover:shadow-md transition-all border-none bg-secondary/30">
+          <Database className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+          <h3 className="text-lg font-bold mb-2">{t.home.consulting}</h3>
+          <p className="text-sm text-muted-foreground">Decision support and optimization</p>
+        </Card>
+      </div>
+    </div>
+  );
 
-  const navigateToPage = (page: Page) => {
-    setActivePage(page);
-    setSelectedProject(null);
-    setMobileMenuOpen(false);
-  };
+  const renderAbout = () => (
+    <div className="space-y-12 max-w-5xl mx-auto px-4">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">{t.about.title}</h1>
+        <p className="text-lg text-muted-foreground">{t.about.subtitle}</p>
+      </div>
 
-  const renderProjectDetail = () => {
-    if (!selectedProject) return null;
-    
-    switch (selectedProject) {
-      case 'supermarket':
-        return <ProjectSupermarket onBack={() => setActivePage('projects')} />;
-      case 'looker':
-        return <ProjectLookerStudio onBack={() => setActivePage('projects')} />;
-      case 'adidas-tableau':
-        return <PROJECTADIDAS onBack={() => setActivePage('projects')} />;
-      default:
-        return null;
-    }
-  };
+      <div className="grid lg:grid-cols-3 gap-8">
+        <Card className="lg:col-span-2 p-8 space-y-4 shadow-sm">
+          <h3 className="text-xl font-bold flex items-center gap-2"><Briefcase className="w-5 h-5 text-blue-600" /> {t.about.journey}</h3>
+          <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <p>{t.about.journeyText1}</p>
+            <p>{t.about.journeyText2}</p>
+            <p>{t.about.journeyText3}</p>
+          </div>
+        </Card>
 
-  const CodeBlock = ({ code }: { code: string }) => (
-    <div className="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
-      <div className="flex items-center justify-between p-3 bg-gray-900 border-b border-gray-700">
-        <div className="flex items-center gap-2">
-          <Code className="w-4 h-4 text-green-400" />
-          <h4 className="text-sm text-green-400">Python</h4>
-        </div>
-        <Button size="sm" variant="outline" className="h-6 px-2 text-xs bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600">
-          <Play className="w-3 h-3 mr-1" />
-          {t.home.runCode}
-        </Button>
-      </div>
-      <div className="p-4">
-        <pre className="text-sm text-green-400 overflow-x-auto">
-          <code>{code}</code>
-        </pre>
-      </div>
-    </div>
-  );
+        <Card className="p-8 shadow-sm">
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-2"><Award className="w-5 h-5 text-orange-600" /> {t.about.skills}</h3>
+          <div className="grid grid-cols-2 gap-3">
+            {technicalSkills.map((skill) => (
+              <div key={skill.name} className="flex flex-col items-center p-3 bg-secondary/50 rounded-xl hover:bg-secondary transition-colors">
+                <span className="text-2xl mb-1">{skill.icon}</span>
+                <span className="text-xs font-medium">{skill.name}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
 
-  const renderHome = () => (
-    <div className="space-y-12 sm:space-y-16">
-      <div className="text-center space-y-4 sm:space-y-6 pt-8 sm:pt-20">
-        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto overflow-hidden">
-          <img 
-            src={profileImage}
-            alt="Yousef Yousry - Data Analyst"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="px-4 sm:px-0">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl mb-3 sm:mb-4">{t.home.title}</h1>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-2">
-            {t.home.subtitle}
-          </p>
-          <p className="text-base sm:text-lg text-blue-600 mb-3 sm:mb-4">
-            {t.home.status}
-          </p>
-          <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
-            {t.home.traits}
-          </p>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t.home.description}
-          </p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
-          <Button onClick={() => setActivePage('projects')} className="flex items-center gap-2 w-full sm:w-auto h-12 sm:h-auto text-sm sm:text-base">
-            {t.home.viewProjects} <ChevronRight className="w-4 h-4" />
-          </Button>
-        </div>
-      </div>
+      <div className="grid md:grid-cols-2 gap-8">
+        <Card className="p-8 shadow-sm">
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-2"><GraduationCap className="w-6 h-6 text-blue-600" /> {t.about.education}</h3>
+          {educationData.degrees.map((degree, i) => (
+            <div key={i} className="border-l-4 border-blue-500 pl-4 py-2 bg-blue-50/30 rounded-r-lg">
+              <h4 className="font-bold text-sm sm:text-base">{degree.title[language]}</h4>
+              <Badge variant="secondary" className="my-2">{degree.level[language]}</Badge>
+              <p className="text-sm text-muted-foreground">{degree.description[language]}</p>
+            </div>
+          ))}
+        </Card>
 
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0">
-        <Card className="p-4 sm:p-6 text-center">
-          <BarChart3 className="w-10 h-10 sm:w-12 sm:h-12 text-blue-600 mx-auto mb-3 sm:mb-4" />
-          <h3 className="text-base sm:text-lg mb-2">{t.home.dataAnalysis}</h3>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            {t.home.dataAnalysisDesc}
-          </p>
-        </Card>
-        <Card className="p-4 sm:p-6 text-center">
-          <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-green-600 mx-auto mb-3 sm:mb-4" />
-          <h3 className="text-base sm:text-lg mb-2">{t.home.dataViz}</h3>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            {t.home.dataVizDesc}
-          </p>
-        </Card>
-        <Card className="p-4 sm:p-6 text-center">
-          <Database className="w-10 h-10 sm:w-12 sm:h-12 text-purple-600 mx-auto mb-3 sm:mb-4" />
-          <h3 className="text-base sm:text-lg mb-2">{t.home.consulting}</h3>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            {t.home.consultingDesc}
-          </p>
-        </Card>
-      </div>
+        <Card className="p-8 shadow-sm">
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-2"><FileText className="w-6 h-6 text-orange-600" /> {t.about.certifications}</h3>
+          <div className="grid grid-cols-1 gap-3">
+            {educationData.certifications.map((cert, i) => (
+              <a 
+                key={i} 
+                href={cert.url} 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center justify-between p-3 border border-gray-100 rounded-lg hover:border-orange-500 hover:bg-orange-50/50 transition-all group shadow-sm bg-white"
+              >
+                <div className="flex items-center gap-3">
+                  <Award className="w-4 h-4 text-orange-600" />
+                  <span className="text-xs sm:text-sm font-medium">{cert.name}</span>
+                </div>
+                <ExternalLink className="w-3 h-3 text-muted-foreground group-hover:text-orange-600" />
+              </a>
+            ))}
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
 
-      <div className="grid grid-cols-3 px-4 sm:px-0">
-        <div className="text-center">
-          <div className="text-2xl sm:text-3xl text-blue-600 mb-1 sm:mb-2">3</div>
-          <div className="text-xs sm:text-sm text-muted-foreground">{t.home.projectsCompleted}</div>
-        </div>
-       
-        <div className="text-center">
-          <div className="text-2xl sm:text-3xl text-purple-600 mb-1 sm:mb-2">4+</div>
-          <div className="text-xs sm:text-sm text-muted-foreground">{t.home.dashboards}</div>
-        </div>
-        
-        <div className="text-center">
-          <div className="text-2xl sm:text-3xl text-orange-600 mb-1 sm:mb-2">&lt;1</div>
-          <div className="text-xs sm:text-sm text-muted-foreground">{t.home.experience}</div>
-        </div>
-      </div>
-    </div>
-  );
+  const renderContent = () => {
+    if (activePage === 'project-detail') {
+      if (selectedProject === 'supermarket') return <ProjectSupermarket onBack={() => setActivePage('projects')} />;
+      if (selectedProject === 'looker') return <ProjectLookerStudio onBack={() => setActivePage('projects')} />;
+      if (selectedProject === 'adidas-tableau') return <PROJECTADIDAS onBack={() => setActivePage('projects')} />;
+    }
+    switch (activePage) {
+      case 'home': return renderHome();
+      case 'about': return renderAbout();
+      case 'projects': 
+        return (
+          <div className="space-y-12 px-4">
+            <div className="text-center">
+              <h1 className="text-3xl font-bold mb-4">{t.projects.title}</h1>
+              <p className="text-lg text-muted-foreground">{t.projects.subtitle}</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project) => (
+                <Card key={project.id} className="overflow-hidden group flex flex-col h-full border-none shadow-lg hover:shadow-2xl transition-all">
+                  <div className="relative h-48">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute top-4 left-4">
+                      <Badge className="bg-white/90 text-black backdrop-blur-sm"><project.icon className="w-3 h-3 mr-1" /> {project.category}</Badge>
+                    </div>
+                  </div>
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
+                    <div className="mt-auto">
+                      <Button onClick={() => { setSelectedProject(project.id); setActivePage('project-detail'); }} className="w-full gap-2">
+                        <ExternalLink className="w-4 h-4" /> {t.projects.viewDetails}
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        );
+      case 'contact': 
+        return (
+          <div className="max-w-4xl mx-auto px-4">
+            <Card className="p-8 sm:p-12 text-center bg-gradient-to-b from-secondary/50 to-background border-none shadow-xl">
+              <Mail className="w-12 h-12 mx-auto mb-6 text-blue-600" />
+              <h1 className="text-3xl font-bold mb-4">{t.contact.title}</h1>
+              <p className="text-lg text-muted-foreground mb-12">{t.contact.subtitle}</p>
+              <div className="grid md:grid-cols-3 gap-8 mb-12 text-left sm:text-center">
+                <div className="space-y-1">
+                  <div className="font-bold">Email</div>
+                  <div className="text-sm text-muted-foreground break-all">youssefyoussry06@gmail.com</div>
+                </div>
+                <div className="space-y-1">
+                  <div className="font-bold">Phone</div>
+                  <div className="text-sm text-muted-foreground">01223160942</div>
+                </div>
+                <div className="space-y-1">
+                  <div className="font-bold">LinkedIn</div>
+                  <a href="https://linkedin.com/in/yousef-yousry" className="text-sm text-blue-600 hover:underline">in/yousef-yousry</a>
+                </div>
+              </div>
+              <Button size="lg" className="w-full sm:w-auto" asChild>
+                <a href="mailto:youssefyoussry06@gmail.com">{t.contact.discussProject}</a>
+              </Button>
+            </Card>
+          </div>
+        );
+      default: return renderHome();
+    }
+  };
 
-  const renderAbout = () => (
-    <div className="space-y-8 sm:space-y-12 px-4 sm:px-0">
-      <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl mb-3 sm:mb-4">{t.about.title}</h1>
-        <p className="text-lg sm:text-xl text-muted-foreground">
-          {t.about.subtitle}
-        </p>
-      </div>
+  return (
+    <div className="min-h-screen bg-background">
+      <nav className="border-b bg-background/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigateToPage('home')}>
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <BarChart3 className="w-4 h-4 text-white" />
+            </div>
+            <span className="font-bold">Yousef Yousry</span>
+          </div>
 
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          <Card className="p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl mb-3 sm:mb-4">{t.about.journey}</h3>
-            <div className="space-y-3 sm:space-y-4">
-              <p className="text-sm sm:text-base text-muted-foreground">
-                {t.about.journeyText1}
-              </p>
-              <p className="text-sm sm:text-base text-muted-foreground">
-                {t.about.journeyText2}
-              </p>
-              <p className="text-sm sm:text-base text-muted-foreground">
-                {t.about.journeyText3}
-              </p>
-            </div>
-          </Card>
+          <div className="hidden md:flex items-center gap-2">
+            {navigation.map((item) => (
+              <Button key={item.id} variant={activePage === item.id ? "secondary" : "ghost"} size="sm" onClick={() => navigateToPage(item.id)}>
+                <item.icon className="w-4 h-4 mr-2" /> {item.label}
+              </Button>
+            ))}
+          </div>
 
-          <Card className="p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl mb-3 sm:mb-4">{t.about.expertise}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <h4 className="text-blue-600 mb-2 text-sm sm:text-base">{t.about.technical}</h4>
-                <ul className="text-xs sm:text-sm text-muted-foreground space-y-1">
-                  <li>• Power BI </li>
-                  <li>• Excel & Power Query </li>
-                  <li>• Python & Pandas</li>
-                  <li>• SQL</li>
-                  <li>• Statistical analysis</li>
-                  
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-green-600 mb-2 text-sm sm:text-base">{t.about.business}</h4>
-                <ul className="text-xs sm:text-sm text-muted-foreground space-y-1">
-                  <li>• Data Cleansing </li>
-                  <li>• Data Visualization </li>
-                  <li>• Performance Analysis </li>
-                  <li>• KPIs & metrics</li>              
-                  <li>• Decision support </li>
-                </ul>
-              </div>
-            </div>
-          </Card>
-        </div>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon"><Menu className="w-6 h-6" /></Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetTitle>Navigation</SheetTitle>
+              <div className="flex flex-col gap-3 mt-8">
+                {navigation.map((item) => (
+                  <Button key={item.id} variant={activePage === item.id ? "default" : "ghost"} onClick={() => navigateToPage(item.id)} className="justify-start h-12">
+                    <item.icon className="w-5 h-5 mr-3" /> {item.label}
+                  </Button>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          <Card className="p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl mb-4 sm:mb-6">{t.about.skills}</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
-              {technicalSkills.map((skill) => (
-                <div key={skill.name} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 border border-gray-200 rounded-lg bg-gray-50">
-                  <span className="text-xl sm:text-2xl">{skill.icon}</span>
-                  <span className="text-xs sm:text-sm">{skill.name}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
+      <main className="max-w-6xl mx-auto py-12">
+        {renderContent()}
+      </main>
 
-          <Card className="p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl mb-4 sm:mb-6">{t.about.languages}</h3>
-            <div className="space-y-3 sm:space-y-4">
-              <div className="flex items-center justify-between p-2 sm:p-3 border border-gray-200 rounded-lg bg-gray-50">
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <span className="text-lg sm:text-2xl"></span>
-                  <span className="text-sm sm:text-base">{t.about.arabic}</span>
-                </div>
-                <Badge variant="secondary" className="text-xs">{t.about.Mother_Tongue}</Badge>
-              </div>
-              <div className="flex items-center justify-between p-2 sm:p-3 border border-gray-200 rounded-lg bg-gray-50">
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <span className="text-lg sm:text-2xl"></span>
-                  <span className="text-sm sm:text-base">{t.about.english}</span>
-                </div>
-                <Badge variant="outline" className="text-xs">{t.about.fluent}</Badge>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Section Expérience Professionnelle */}
-        
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Section Formation & Diplômes */}
-          <Card className="p-4 sm:p-6">
-            <div className="flex items-center gap-2 mb-4 sm:mb-6">
-              <GraduationCap className="w-5 h-5 text-blue-600" />
-              <h3 className="text-lg sm:text-xl">{t.about.education}</h3>
-            </div>
-            <div className="space-y-4 sm:space-y-6">
-              {educationData.degrees.map((degree, index) => (
-                <div key={index} className="border-l-4 border-blue-500 pl-3 sm:pl-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                    <h4 className="text-sm sm:text-base">{degree.title[language]}</h4>
-                    <Badge variant="secondary" className="text-xs w-fit">{degree.level[language]}</Badge>
-                  </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    {degree.description[language]}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          {/* Section Certifications DataScientest */}
-          <Card className="p-4 sm:p-6">
-            <div className="flex items-center gap-2 mb-4 sm:mb-6">
-              <Award className="w-5 h-5 text-orange-600" />
-              <h3 className="text-lg sm:text-xl">{t.about.certifications}</h3>
-            </div>
-            <div className="grid grid-cols-1 gap-2 sm:gap-3">
-              {educationData.certifications.map((cert, index) => (
-                <div key={index} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 border border-gray-200 rounded-lg bg-gray-50">
-                  <Award className="w-4 h-4 text-orange-600 flex-shrink-0" />
-                  <span className="text-xs sm:text-sm">{cert.name}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderProjects = () => (
-    <div className="space-y-8 sm:space-y-12 px-4 sm:px-0">
-      <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl mb-3 sm:mb-4">{t.projects.title}</h1>
-        <p className="text-lg sm:text-xl text-muted-foreground">
-          {t.projects.subtitle}
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-        {projects.map((project) => {
-          const CategoryIcon = project.icon;
-          return (
-            <Card key={project.id} className="overflow-hidden group hover:shadow-lg transition-all duration-300">
-              <div className="relative">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-40 sm:h-48 object-cover"
-                />
-                <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
-                  <Badge className={getCategoryColor(project.category)}>
-                    <CategoryIcon className="w-3 h-3 mr-1" />
-                    <span className="text-xs">{project.category}</span>
-                  </Badge>
-                </div>
-              </div>
-              
-              <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
-                <div>
-                  <h3 className="text-base sm:text-lg mb-2">{project.title}</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground">{project.description}</p>
-                </div>
-
-                <div className="space-y-2 sm:space-y-3">
-                  <div>
-                    <h4 className="text-xs sm:text-sm mb-1 sm:mb-2">{t.projects.technologies}</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {project.tech.map((tech) => (
-                        <Badge key={tech} variant="outline" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-xs sm:text-sm mb-1 sm:mb-2">{t.projects.results}</h4>
-                    <div className="flex flex-wrap gap-1 sm:gap-2">
-                      {project.metrics.map((metric, index) => (
-                        <span key={index} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                          {metric}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-2 pt-2">
-                  <Button 
-                    size="sm" 
-                    onClick={() => openProject(project.id)}
-                    className="flex items-center gap-1 text-xs w-full sm:w-auto h-10 sm:h-auto touch-manipulation"
-                  >
-                    <ExternalLink className="w-3 h-3" />
-                    {t.projects.viewDetails}
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          );
-        })}
-      </div>
-    </div>
-  );
-
-  const renderContact = () => (
-    <div className="space-y-8 sm:space-y-12 px-4 sm:px-0">
-      <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl mb-3 sm:mb-4">{t.contact.title}</h1>
-        <p className="text-lg sm:text-xl text-muted-foreground">
-          {t.contact.subtitle}
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
-        <Card className="p-6 sm:p-8">
-          <h3 className="text-lg sm:text-xl mb-4 sm:mb-6">{t.contact.contactMe}</h3>
-          <div className="space-y-4 sm:space-y-6">
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-              </div>
-              <div>
-                <h4 className="text-sm sm:text-base">{t.contact.email}</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground">youssefyoussry06@gmail.com</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
-              </div>
-              <div>
-                <h4 className="text-sm sm:text-base">{t.contact.phone}</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground">01223160942</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-              </div>
-              <div>
-                <h4 className="text-sm sm:text-base">{t.contact.linkedin}</h4>
-                <a 
-                  href="https://www.linkedin.com/in/yousef-yousry/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-xs sm:text-sm text-muted-foreground hover:text-green-600 transition-colors"
-                >
-                  linkedin.com/in/yousef-yousry
-                </a>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-6 sm:p-8">
-          <h3 className="text-lg sm:text-xl mb-4 sm:mb-6">{t.contact.services}</h3>
-            <div className="flex items-start gap-2 sm:gap-3">
-              <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 sm:mt-3 flex-shrink-0" />
-              <div>
-                <h4 className="text-sm sm:text-base">{t.contact.dataAnalysis}</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  {t.contact.dataAnalysisDesc}
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-2 sm:gap-3">
-              <div className="w-2 h-2 bg-green-600 rounded-full mt-2 sm:mt-3 flex-shrink-0" />
-              <div>
-                <h4 className="text-sm sm:text-base">{t.contact.dashboardsReporting}</h4>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  {t.contact.dashboardsReportingDesc}
-                </p>
-              </div>
-            </div>
-          
-          
-          <Button 
-            asChild
-            className="w-full mt-4 sm:mt-6 text-sm h-12 sm:h-auto touch-manipulation"
-          >
-            <a
-                  href="mailto:youssefyoussry06@gmail.com?subject=Project%20Discussion&body=Hi,%0A%0AI%20would%20like%20to%20discuss%20a%20project."
-            > 
-            {t.contact.discussProject}
-              </a>
-          </Button>
-        </Card>
-      </div>
-    </div>
-  );
-
-  const renderContent = () => {
-    switch (activePage) {
-      case 'home': return renderHome();
-      case 'about': return renderAbout();
-      case 'projects': return renderProjects();
-      case 'contact': return renderContact();
-      case 'project-detail': return renderProjectDetail();
-      default: return renderHome();
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-              </div>
-              <span className="text-base sm:text-lg">Yousef Yousry</span>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-4">
-              <div className="flex gap-1">
-                {navigation.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Button
-                      key={item.id}
-                      variant={activePage === item.id ? "default" : "ghost"}
-                      size="sm"
-                      onClick={() => navigateToPage(item.id)}
-                      className="flex items-center gap-2"
-                    >
-                      <Icon className="w-4 h-4" />
-                      {item.label}
-                    </Button>
-                  );
-                })}
-              </div>
-              
-              {/* Language Toggle */}
-              
-
-            {/* Mobile Navigation */}
-            
-              
-              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="sm" className="p-2">
-                    <Menu className="w-5 h-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-[280px] sm:w-[350px]">
-                  <SheetTitle className="sr-only">{t.nav.menu}</SheetTitle>
-                  <SheetDescription className="sr-only">
-                      Portfolio navigation menu
-                  </SheetDescription>
-                  <div className="flex flex-col gap-6 mt-8">
-                    <div className="flex items-center gap-2 px-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                        <BarChart3 className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-lg">Yousef Yousry</span>
-                    </div>
-                    
-                    <div className="flex flex-col gap-2">
-                      {navigation.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                          <Button
-                            key={item.id}
-                            variant={activePage === item.id ? "default" : "ghost"}
-                            onClick={() => navigateToPage(item.id)}
-                            className="flex items-center gap-3 justify-start w-full p-3 h-auto"
-                          >
-                            <Icon className="w-5 h-5" />
-                            {item.label}
-                          </Button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
-        {renderContent()}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t mt-12 sm:mt-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded flex items-center justify-center">
-                <BarChart3 className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
-              </div>
-              <span className="text-sm sm:text-base text-muted-foreground">© 2026 Yousef Yousry</span>
-            </div>
-            
-            <div className="flex gap-3 sm:gap-4">
-              <Button size="sm" variant="ghost" className="p-2" asChild>
-                <a href="mailto:youssefyoussry06@gmail.com">
-                  <Mail className="w-4 h-4" />
-                </a>
-              </Button>
-              <Button size="sm" variant="ghost" className="p-2" asChild>
-                <a href="https://www.linkedin.com/in/yousef-yousry/" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="w-4 h-4" />
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+      <footer className="border-t py-12 mt-20 bg-secondary/10">
+        <div className="max-w-6xl mx-auto px-6 text-center text-muted-foreground text-sm">
+          © 2026 Yousef Yousry • Built with React & Tailwind
+        </div>
+      </footer>
+    </div>
+  );
 }
