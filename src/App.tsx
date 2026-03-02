@@ -168,7 +168,7 @@ export default function App() {
                         <div className="w-14 h-14 rounded-2xl bg-blue-600 group-hover:bg-white/20 flex items-center justify-center text-white"><Send className="w-6 h-6" /></div>
                         <div>
                             <h3 className="text-2xl font-black uppercase italic group-hover:text-white">Email Me</h3>
-                            <p className="text-muted-foreground group-hover:text-blue-100 font-medium uppercase text-[10px] tracking-widest mt-2">youssefyoussry06@gmail.com</p>
+                            <p className="text-muted-foreground group-hover:text-blue-100 font-medium text-[10px] tracking-widest mt-2">youssefyoussry06@gmail.com</p>
                         </div>
                     </div>
                 </Card>
