@@ -217,7 +217,7 @@ export default function App() {
 
       {/* --- Mobile Top Bar --- */}
       <div className="md:hidden sticky top-0 z-50 h-16 bg-white/70 dark:bg-black/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 px-6 flex items-center justify-between">
-        <div className="font-bold text-lg italic tracking-tighter" onClick={() => navigateToPage('home')}>YOUSEF.Y</div>
+        <div className="font-bold text-lg italic tracking-tighter" onClick={() => navigateToPage('home')}>Yousef Yousry</div>
         <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/50 dark:bg-white/5 transition-all">
           {isDarkMode ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-blue-600" />}
         </button>
