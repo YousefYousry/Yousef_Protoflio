@@ -7,6 +7,7 @@ import {
   Linkedin, MessageSquare, Sun, Moon, Database, Search, PieChart 
 } from 'lucide-react';
 
+import ProjectHealthcare from './components/ProjectHealthcare';
 import ProjectSupermarket from './components/ProjectSupermarket';
 import ProjectLookerStudio from './components/ProjectLookerStudio';
 import PROJECTADIDAS from './components/PROJECTADIDAS';
@@ -18,6 +19,12 @@ const projects = [
   { id: 'looker', title: 'Game of Thrones Analysis', category: 'BI', image: 'https://i.ibb.co/bgKX2kH6/815c1250ff6db53e8455e98739f9f628.jpg' },
   { id: 'adidas-tableau', title: 'Adidas US Sales Analysis', category: 'Sales Analytics', image: 'https://i.ibb.co/BHfmYpvH/image.jpg' },
   { id: 'supermarket', title: 'Global Sales Analysis', category: 'Supply Chain', image: 'https://i.ibb.co/CRG14nw/9a0c027694a7b25c293fa83b1abc061b.jpg' },
+  { 
+    id: 'healthcare-dash', 
+    title: 'Healthcare Operations & Revenue', 
+    category: 'Healthcare Analytics', 
+    image: 'https://i.postimg.cc/zvc0HtCf/Doctor-cradling-glowing-202603190458.jpg' 
+  },
 ];
 
 const educationData = {
@@ -114,6 +121,7 @@ export default function App() {
 
   const renderContent = () => {
     if (activePage === 'project-detail') {
+      if (selectedProject === 'healthcare-dash') return <ProjectHealthcare onBack={() => setActivePage('projects')} />;
       if (selectedProject === 'supermarket') return <ProjectSupermarket onBack={() => setActivePage('projects')} />;
       if (selectedProject === 'looker') return <ProjectLookerStudio onBack={() => setActivePage('projects')} />;
       if (selectedProject === 'adidas-tableau') return <PROJECTADIDAS onBack={() => setActivePage('projects')} />;

@@ -187,3 +187,10 @@ html {
   font-size: var(--font-size);
   scroll-behavior: smooth;
 }
+@layer utilities {
+  .high-quality-img {
+    image-rendering: -webkit-optimize-contrast; /* لجوجل كروم وسافاري */
+    image-rendering: crisp-edges;               /* لفايرفوكس */
+    image-rendering: auto;
+  }
+}
