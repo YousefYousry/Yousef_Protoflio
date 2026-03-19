@@ -86,7 +86,7 @@ export default function App() {
           <p className="text-lg sm:text-2xl text-muted-foreground font-normal max-w-2xl mx-auto tracking-tight px-4 italic">Data Analyst Specialized in Power BI</p>
           <div className="flex flex-wrap gap-4 justify-center mt-10 px-6">
             <Button onClick={() => navigateToPage('projects')} className="rounded-full px-8 h-12 bg-blue-600 hover:bg-blue-700 font-bold uppercase italic tracking-widest text-[10px] flex-1 sm:flex-none shadow-lg shadow-blue-500/20">View Projects</Button>
-            <Button variant="outline" className="rounded-full px-8 h-12 border-2 font-bold uppercase italic tracking-widest text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur-md flex-1 sm:flex-none" onClick={() => window.open('https://drive.google.com/file/d/1LFr9T41b1zOS6p4G8ClnPR_6xispa4z6/view?usp=sharing')}>Download CV</Button>
+            <Button variant="outline" className="rounded-full px-8 h-12 border-2 font-bold uppercase italic tracking-widest text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur-md flex-1 sm:flex-none" onClick={() => window.open('https://drive.google.com/file/d/1cRK5JFwnZlU9Dr3wHI8wUPL1f3BWBIqD/view?usp=sharing')}>Download CV</Button>
           </div>
         </div>
       </header>
@@ -265,10 +265,6 @@ export default function App() {
           ))}
         </nav>
       </div>
-
-      <footer className="py-12 text-center text-[9px] font-bold tracking-[0.4em] text-muted-foreground uppercase opacity-40 italic">
-        © {new Date().getFullYear()} Yousef Yousry • Data Analytics Portfolio
-      </footer>
     </div>
   );
 }
