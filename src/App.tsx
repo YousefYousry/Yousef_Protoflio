@@ -1,10 +1,29 @@
-import React, { useState, useEffect } from 'react'; 
-import { Button } from './components/ui/button';
-import { Card } from './components/ui/card';
-import { Badge } from './components/ui/badge';
-import { 
-  Home, User, Briefcase, Mail, BarChart3, ExternalLink, Send, 
-  Linkedin, MessageSquare, Sun, Moon, Database, Search, PieChart 
+import { useEffect, useState } from 'react';
+import {
+  Activity,
+  ArrowRight,
+  BarChart3,
+  BriefcaseBusiness,
+  Check,
+  CheckCircle2,
+  Database,
+  Download,
+  ExternalLink,
+  Github,
+  Home,
+  Linkedin,
+  Mail,
+  Menu,
+  Moon,
+  MessageCircle,
+  PieChart,
+  Search,
+  Send,
+  Sparkles,
+  Sun,
+  Target,
+  User,
+  X,
 } from 'lucide-react';
 
 import ProjectHealthcare from './components/ProjectHealthcare';
@@ -12,259 +31,239 @@ import ProjectSupermarket from './components/ProjectSupermarket';
 import ProjectLookerStudio from './components/ProjectLookerStudio';
 import PROJECTADIDAS from './components/PROJECTADIDAS';
 import profileImage from './assets/unnamed.png';
+import './App.css';
 
 type Page = 'home' | 'about' | 'projects' | 'contact' | 'project-detail';
 
-const projects = [
-  { id: 'looker', title: 'Game of Thrones Analysis', category: 'BI', image: 'https://i.ibb.co/bgKX2kH6/815c1250ff6db53e8455e98739f9f628.jpg' },
-  { id: 'adidas-tableau', title: 'Adidas US Sales Analysis', category: 'Sales Analytics', image: 'https://i.ibb.co/BHfmYpvH/image.jpg' },
-  { id: 'supermarket', title: 'Global Sales Analysis', category: 'Supply Chain', image: 'https://i.ibb.co/CRG14nw/9a0c027694a7b25c293fa83b1abc061b.jpg' },
-  { 
-    id: 'healthcare-dash', 
-    title: 'Healthcare Operations & Revenue', 
-    category: 'Healthcare Analytics', 
-    image: 'https://i.postimg.cc/zvc0HtCf/Doctor-cradling-glowing-202603190458.jpg' 
+type Project = {
+  id: string;
+  number: string;
+  title: string;
+  shortTitle: string;
+  category: string;
+  description: string;
+  image: string;
+  tools: string[];
+  result: string;
+  accent: string;
+};
+
+const navItems: { id: Exclude<Page, 'project-detail'>; label: string; icon: typeof Home }[] = [
+  { id: 'home', label: 'Home', icon: Home },
+  { id: 'about', label: 'About', icon: User },
+  { id: 'projects', label: 'Work', icon: BriefcaseBusiness },
+  { id: 'contact', label: 'Contact', icon: Mail },
+];
+
+const projects: Project[] = [
+  {
+    id: 'healthcare-dash',
+    number: '01',
+    title: 'Healthcare Operations & Revenue',
+    shortTitle: 'Clinical revenue intelligence',
+    category: 'Healthcare analytics',
+    description: 'A Power BI reporting system connecting 40K admissions, clinical conditions, insurance providers, and billing outcomes.',
+    image: 'https://i.postimg.cc/zvc0HtCf/Doctor-cradling-glowing-202603190458.jpg',
+    tools: ['Power BI', 'DAX', 'Power Query'],
+    result: '$1Bn revenue analyzed',
+    accent: 'from-cyan-500/80 to-blue-700/80',
+  },
+  {
+    id: 'adidas-tableau',
+    number: '02',
+    title: 'Adidas US Sales Analysis',
+    shortTitle: 'Retail performance dashboard',
+    category: 'Sales analytics',
+    description: 'A decision-ready view of product, retailer, region, and channel performance for faster commercial analysis.',
+    image: 'https://i.ibb.co/BHfmYpvH/image.jpg',
+    tools: ['Tableau', 'Data storytelling', 'KPIs'],
+    result: 'Channel performance clarified',
+    accent: 'from-orange-400/80 to-rose-600/80',
+  },
+  {
+    id: 'supermarket',
+    number: '03',
+    title: 'Global Sales Analysis',
+    shortTitle: 'Supply chain visibility',
+    category: 'Supply chain analytics',
+    description: 'An interactive analysis of global supermarket sales built to reveal product, market, and profitability patterns.',
+    image: 'https://i.ibb.co/CRG14nw/9a0c027694a7b25c293fa83b1abc061b.jpg',
+    tools: ['Power BI', 'Data modeling', 'Reporting'],
+    result: 'Global trends surfaced',
+    accent: 'from-emerald-400/80 to-teal-700/80',
+  },
+  {
+    id: 'looker',
+    number: '04',
+    title: 'Game of Thrones Analysis',
+    shortTitle: 'Narrative data exploration',
+    category: 'Business intelligence',
+    description: 'A visual exploration that turns a rich dataset into a clear narrative using filters, comparisons, and focused storytelling.',
+    image: 'https://i.ibb.co/bgKX2kH6/815c1250ff6db53e8455e98739f9f628.jpg',
+    tools: ['Looker Studio', 'Exploration', 'Visual design'],
+    result: 'Complex data made legible',
+    accent: 'from-violet-500/80 to-indigo-700/80',
   },
 ];
 
-const educationData = {
-  degrees: [{ title: "Bachelor's Computer and Information Science", description: 'Information Systems Department' }],
-  certifications: [
-    { name: 'Introduction to SQL', url: 'https://drive.google.com/file/d/1q-7Iyst_ABVEuZANVii44dsLH2VO3Xub/view?usp=sharing' },
-    { name: 'Intermediate to SQL', url: 'https://drive.google.com/file/d/1pv5pLxQbsoJ_laosoLBBLObGdO58Rd0h/view?usp=sharing' },
-    { name: 'Joining Data in SQL', url: 'https://drive.google.com/file/d/1ptNXyOo8LGhJY2yng56UojrEJWEQq8Rt/view?usp=sharing' },
-    { name: 'Introduction to Python', url: 'https://drive.google.com/file/d/1HvzZeotMPRc-0qn3A5xNIomjlaS8JPS7/view?usp=sharing' },
-    { name: 'Intermediate Python', url: 'https://drive.google.com/file/d/1mkSOSmnhMqutdpe-9WZ_BxIXNIgcMuZi/view?usp=sharing' },
-    { name: 'Data Manipulation with pandas', url: 'https://drive.google.com/file/d/1ITKp9ErKKPqSGYNv0jXsJC3ZXPk4a4cU/view?usp=sharing' },
-    { name: 'BI Development — ITI', url: 'https://www.linkedin.com/posts/yousef-yousry_businessintelligence-sql-dataanalytics-activity-7244027804260986880-OWrI' },
-  ]
-};
+const education = [
+  {
+    title: "Bachelor's in Computer and Information Science",
+    detail: 'Information Systems Department',
+  },
+  {
+    title: 'Business Intelligence Development — ITI',
+    detail: 'Practical training in analytics, databases, and BI development',
+  },
+];
 
-export default function App() {
+const certifications = [
+  { name: 'Introduction to SQL', url: 'https://drive.google.com/file/d/1q-7Iyst_ABVEuZANVii44dsLH2VO3Xub/view?usp=sharing' },
+  { name: 'Intermediate to SQL', url: 'https://drive.google.com/file/d/1pv5pLxQbsoJ_laosoLBBLObGdO58Rd0h/view?usp=sharing' },
+  { name: 'Joining Data in SQL', url: 'https://drive.google.com/file/d/1ptNXyOo8LGhJY2yng56UojrEJWEQq8Rt/view?usp=sharing' },
+  { name: 'Introduction to Python', url: 'https://drive.google.com/file/d/1HvzZeotMPRc-0qn3A5xNIomjlaS8JPS7/view?usp=sharing' },
+  { name: 'Intermediate Python', url: 'https://drive.google.com/file/d/1mkSOSmnhMqutdpe-9WZ_BxIXNIgcMuZi/view?usp=sharing' },
+  { name: 'Data Manipulation with pandas', url: 'https://drive.google.com/file/d/1ITKp9ErKKPqSGYNv0jXsJC3ZXPk4a4cU/view?usp=sharing' },
+];
+
+const cvUrl = 'https://drive.google.com/file/d/1cRK5JFwnZlU9Dr3wHI8wUPL1f3BWBIqD/view?usp=sharing';
+
+function openExternal(url: string) {
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
+  return (
+    <div className="max-w-2xl space-y-4">
+      <p className="section-eyebrow"><Sparkles className="h-3.5 w-3.5" /> {eyebrow}</p>
+      <h2 className="section-title">{title}</h2>
+      {copy && <p className="section-copy">{copy}</p>}
+    </div>
+  );
+}
+
+function App() {
   const [activePage, setActivePage] = useState<Page>('home');
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkMode);
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
-  const navigateToPage = (p: Page) => { setActivePage(p); setSelectedProject(null); window.scrollTo(0, 0); };
-
-  const BlurGradientBackground = () => (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-slate-50 dark:bg-[#08080a]">
-      <style>{`
-        @keyframes float-orb {
-          0% { transform: translate(0, 0) rotate(0deg); }
-          50% { transform: translate(8vw, 8vh) rotate(180deg); }
-          100% { transform: translate(0, 0) rotate(360deg); }
-        }
-        .blur-orb {
-          position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.18; animation: float-orb linear infinite; will-change: transform;
-        }
-        .dots-full {
-          position: absolute; inset: 0; background-image: radial-gradient(circle, #94a3b8 1.2px, transparent 1.2px); background-size: 28px 28px; opacity: 0.22;
-        }
-        .dark .dots-full { background-image: radial-gradient(circle, #334155 1.4px, transparent 1.4px); opacity: 0.32; }
-      `}</style>
-      <div className="blur-orb w-[600px] h-[600px] bg-blue-500/30 top-[-5%] left-[-5%]" style={{ animationDuration: '18s' }} />
-      <div className="blur-orb w-[500px] h-[500px] bg-emerald-400/20 bottom-[-5%] right-[-5%]" style={{ animationDuration: '24s' }} />
-      <div className="dots-full" />
-    </div>
-  );
-
-  const renderHome = () => (
-    <div className="max-w-7xl mx-auto px-6 space-y-32 relative z-10 animate-in fade-in duration-700 pb-24 md:pb-0">
-      <header className="text-center space-y-8 pt-12">
-        <div className="relative inline-block">
-          <div className="absolute inset-0 bg-blue-600/10 blur-3xl rounded-full" />
-          <img src={profileImage} alt="Yousef" className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-[2.5rem] mx-auto object-cover border-4 border-white dark:border-white/5 shadow-2xl" />
-        </div>
-        <div className="space-y-4">
-          <h1 className="text-5xl sm:text-8xl font-black tracking-tighter uppercase italic leading-none">Yousef Yousry</h1>
-          <p className="text-lg sm:text-2xl text-muted-foreground font-normal max-w-2xl mx-auto tracking-tight px-4 italic">Data Analyst Specialized in Power BI</p>
-          <div className="flex flex-wrap gap-4 justify-center mt-10 px-6">
-            <Button onClick={() => navigateToPage('projects')} className="rounded-full px-8 h-12 bg-blue-600 hover:bg-blue-700 font-bold uppercase italic tracking-widest text-[10px] flex-1 sm:flex-none shadow-lg shadow-blue-500/20">View Projects</Button>
-            <Button variant="outline" className="rounded-full px-8 h-12 border-2 font-bold uppercase italic tracking-widest text-[10px] bg-white/20 dark:bg-black/20 backdrop-blur-md flex-1 sm:flex-none" onClick={() => window.open('https://drive.google.com/file/d/1cRK5JFwnZlU9Dr3wHI8wUPL1f3BWBIqD/view?usp=sharing')}>Download CV</Button>
-          </div>
-        </div>
-      </header>
-
-      <section className="space-y-16">
-        <div className="text-center space-y-4">
-          <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">My <span className="text-blue-600">Process</span></h2>
-          <p className="text-muted-foreground uppercase text-[10px] tracking-[0.4em] font-bold italic">From Raw Data to Business Intelligence</p>
-        </div>
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 dark:bg-white/5 -z-10" />
-          {[
-            { step: "01", title: "Understand", icon: <Search className="w-6 h-6" />, desc: "Defining the problem and gathering requirements from business stakeholders." },
-            { step: "02", title: "Analyze", icon: <Database className="w-6 h-6" />, desc: "Cleaning data with Power and building complex DAX measures." },
-            { step: "03", title: "Visualize", icon: <PieChart className="w-6 h-6" />, desc: "Creating interactive dashboards that drive data-backed decisions." }
-          ].map((item, idx) => (
-            <div key={idx} className="group">
-              <Card className="p-8 border-none bg-white/60 dark:bg-white/5 backdrop-blur-2xl shadow-xl hover:translate-y-[-8px] transition-all duration-500 rounded-[2rem]">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-5xl font-black italic opacity-10 group-hover:opacity-100 group-hover:text-blue-600 transition-all duration-500">{item.step}</span>
-                  <div className="p-3 bg-blue-600/10 text-blue-600 rounded-2xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">{item.icon}</div>
-                </div>
-                <h3 className="text-2xl font-black uppercase italic mb-3 tracking-tighter">{item.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-              </Card>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-
-  const renderContent = () => {
-    if (activePage === 'project-detail') {
-      if (selectedProject === 'healthcare-dash') return <ProjectHealthcare onBack={() => setActivePage('projects')} />;
-      if (selectedProject === 'supermarket') return <ProjectSupermarket onBack={() => setActivePage('projects')} />;
-      if (selectedProject === 'looker') return <ProjectLookerStudio onBack={() => setActivePage('projects')} />;
-      if (selectedProject === 'adidas-tableau') return <PROJECTADIDAS onBack={() => setActivePage('projects')} />;
-    }
-    switch (activePage) {
-      case 'home': return renderHome();
-      case 'projects': return (
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8 pb-20 animate-in slide-in-from-bottom-5">
-          {projects.map(p => (
-            <Card key={p.id} onClick={() => { setSelectedProject(p.id); setActivePage('project-detail') }}
-              className="group cursor-pointer overflow-hidden border-none bg-white/40 dark:bg-[#111] backdrop-blur-2xl shadow-lg rounded-[1.5rem] flex flex-col h-fit">
-              <div className="relative aspect-video overflow-hidden">
-                <img src={p.image} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" alt={p.title} />
-              </div>
-              <div className="px-5 pb-5 pt-2 space-y-1">
-                <Badge className="bg-blue-600/10 text-blue-500 border-none text-[8px] tracking-[0.1em] uppercase px-2 py-0 h-5 font-bold">{p.category}</Badge>
-                <h3 className="text-lg font-black italic uppercase tracking-tighter leading-tight dark:text-white">{p.title}</h3>
-              </div>
-            </Card>
-          ))}
-        </div>
-      );
-      case 'about': return (
-        <div className="max-w-5xl mx-auto px-6 space-y-12 pb-24 animate-in fade-in">
-          <Card className="p-10 border-none bg-white/40 dark:bg-white/5 backdrop-blur-2xl shadow-xl rounded-[2.5rem]">
-            <h2 className="text-3xl font-black mb-6 italic uppercase tracking-tighter flex items-center gap-3"><User className="text-blue-500" /> About Me</h2>
-            <div className="text-lg text-muted-foreground font-normal leading-relaxed space-y-4 italic">
-              <p>As a Computer Science and Information Systems graduate, I have a strong technical background in managing and analyzing data.</p>
-              <p>My goal is to help companies make informed decisions through rigorous analysis.</p>
-            </div>
-          </Card>
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 border-none bg-white/40 dark:bg-white/5 backdrop-blur-2xl border-l-4 border-blue-500 rounded-[2rem]">
-              <h3 className="text-lg font-black mb-4 text-blue-600 uppercase italic">Education</h3>
-              {educationData.degrees.map((d, i) => (
-                <div key={i}><h4 className="font-bold text-lg leading-tight">{d.title}</h4><p className="text-muted-foreground text-sm mt-1">{d.description}</p></div>
-              ))}
-            </Card>
-            <Card className="p-8 border-none bg-white/40 dark:bg-white/5 backdrop-blur-2xl border-l-4 border-orange-500 rounded-[2rem]">
-              <h3 className="text-lg font-black mb-4 text-orange-500 uppercase italic">Certifications</h3>
-              <div className="grid gap-2">{educationData.certifications.map((c, i) => (
-                <a key={i} href={c.url} target="_blank" rel="noreferrer" className="flex items-center justify-between p-3 bg-white/50 dark:bg-white/5 rounded-xl text-[10px] font-medium uppercase tracking-wider hover:bg-blue-600/10 transition-all">{c.name} <ExternalLink className="w-3 h-3" /></a>
-              ))}</div>
-            </Card>
-          </div>
-        </div>
-      );
-      case 'contact': return (
-        <div className="max-w-4xl mx-auto px-6 pb-24 md:pb-0 animate-in zoom-in">
-          <div className="text-center mb-10">
-            <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none px-4">Let's <span className="text-blue-600">Connect</span></h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card onClick={() => window.open('mailto:youssefyoussry06@gmail.com')} className="md:col-span-2 p-8 border-none bg-white/40 dark:bg-white/5 backdrop-blur-3xl group cursor-pointer hover:bg-blue-600 transition-all rounded-[2rem] shadow-xl">
-              <div className="flex flex-col h-full justify-between space-y-8">
-                <div className="w-14 h-14 rounded-2xl bg-blue-600 group-hover:bg-white/20 flex items-center justify-center text-white"><Send className="w-6 h-6" /></div>
-                <div>
-                  <h3 className="text-2xl font-black uppercase italic group-hover:text-white">Email Me</h3>
-                  <p className="text-muted-foreground group-hover:text-blue-100 font-medium text-[10px] tracking-widest mt-2">youssefyoussry06@gmail.com</p>
-                </div>
-              </div>
-            </Card>
-            <Card onClick={() => window.open('https://linkedin.com/in/yousef-yousry')} className="p-8 border-none bg-white/40 dark:bg-white/5 backdrop-blur-3xl group cursor-pointer hover:bg-[#0077B5] transition-all rounded-[2rem] shadow-xl text-center flex flex-col items-center justify-between gap-6">
-              <div className="w-14 h-14 rounded-2xl bg-[#0077B5] group-hover:bg-white/20 flex items-center justify-center text-white"><Linkedin className="w-6 h-6" /></div>
-              <h3 className="text-lg font-black uppercase italic group-hover:text-white tracking-tighter">LinkedIn</h3>
-            </Card>
-            <Card onClick={() => window.open('https://wa.me/201223160942', '_blank')} className="md:col-span-3 p-8 border-none bg-white/40 dark:bg-white/5 backdrop-blur-3xl group cursor-pointer hover:bg-[#25D366] transition-all rounded-[2rem] shadow-xl">
-              <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <h3 className="text-2xl font-black uppercase italic group-hover:text-white">WhatsApp</h3>
-                  <p className="text-muted-foreground group-hover:text-emerald-50 font-medium uppercase text-[10px] tracking-widest">Chat instantly</p>
-                </div>
-                <div className="w-14 h-14 rounded-full bg-[#25D366] group-hover:bg-white/20 flex items-center justify-center text-white shadow-lg"><MessageSquare className="w-6 h-6" /></div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      );
-      default: return renderHome();
-    }
+  const navigateToPage = (page: Page) => {
+    setActivePage(page);
+    setSelectedProject(null);
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  return (
-    <div className="min-h-screen text-slate-900 dark:text-white transition-all duration-500 relative font-sans selection:bg-blue-600 selection:text-white overflow-x-hidden">
-      <BlurGradientBackground />
+  const openProject = (id: string) => {
+    setSelectedProject(id);
+    setActivePage('project-detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-      {/* --- Desktop Nav (FIXED) --- */}
-      <nav className="fixed top-0 left-0 w-full z-[100] hidden md:flex h-20 bg-white/70 dark:bg-black/40 backdrop-blur-xl border-b border-black/5 dark:border-white/5 px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between w-full">
-          <div className="group cursor-pointer flex items-center gap-3" onClick={() => navigateToPage('home')}>
-            <div className="relative w-10 h-10 overflow-hidden rounded-xl transition-all duration-500 group-hover:rounded-full group-hover:scale-110 shadow-sm">
-              <img src={profileImage} alt="Yousef" className="w-full h-full object-cover transition-all duration-500 group-hover:contrast-110" />
+  const renderProjectDetail = () => {
+    if (selectedProject === 'healthcare-dash') return <ProjectHealthcare onBack={() => navigateToPage('projects')} />;
+    if (selectedProject === 'supermarket') return <ProjectSupermarket onBack={() => navigateToPage('projects')} />;
+    if (selectedProject === 'looker') return <ProjectLookerStudio onBack={() => navigateToPage('projects')} />;
+    if (selectedProject === 'adidas-tableau') return <PROJECTADIDAS onBack={() => navigateToPage('projects')} />;
+    return null;
+  };
+
+  const renderHome = () => (
+    <>
+      <section className="hero-shell container-wide">
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <div className="status-pill"><span className="status-dot" /> Available for analytics opportunities</div>
+            <p className="hero-kicker">Data analyst · Business intelligence · Power BI</p>
+            <h1 className="hero-title">Turning messy data into <span>clear decisions.</span></h1>
+            <p className="hero-description">I’m Yousef Yousry, a data analyst who builds practical dashboards and reporting systems that help teams understand performance, find opportunities, and move with confidence.</p>
+            <div className="hero-actions">
+              <button className="button-primary" onClick={() => navigateToPage('projects')}>Explore my work <ArrowRight className="h-4 w-4" /></button>
+              <button className="button-secondary" onClick={() => openExternal(cvUrl)}><Download className="h-4 w-4" /> Download CV</button>
             </div>
-
-            {/* الاسم اللي جنب الصورة فوق */}
-            <span className="font-black italic tracking-widest opacity-90 group-hover:opacity-100 transition-opacity uppercase text-sm"></span>
+            <div className="hero-proof">
+              <div><strong>Power BI</strong><span>Primary toolkit</span></div>
+              <div><strong>SQL + Python</strong><span>Data foundations</span></div>
+              <div><strong>End-to-end</strong><span>From question to insight</span></div>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex gap-1">
-              {['home', 'about', 'projects', 'contact'].map((id) => (
-                <Button key={id} variant={activePage === id ? "secondary" : "ghost"} onClick={() => navigateToPage(id as Page)} className="rounded-full px-5 font-bold uppercase text-[9px] tracking-[0.2em]">{id}</Button>
-              ))}
+          <div className="hero-visual" aria-label="Analytics dashboard preview">
+            <div className="hero-orbit hero-orbit-one" />
+            <div className="hero-orbit hero-orbit-two" />
+            <div className="dashboard-window">
+              <div className="window-bar"><div className="window-dots"><i /><i /><i /></div><span>insight_workspace.pbix</span><Activity className="h-4 w-4 text-cyan-300" /></div>
+              <div className="dashboard-header"><div><span>Performance overview</span><strong>Executive dashboard</strong></div><span className="live-tag">LIVE VIEW</span></div>
+              <div className="chart-card chart-card-large"><div className="chart-label"><span>Revenue trend</span><strong>$1.24M <em>+18.6%</em></strong></div><div className="chart-lines"><div className="chart-line line-one" /><div className="chart-line line-two" /><div className="chart-line line-three" /></div><div className="chart-axis"><span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span><span>SEP</span><span>NOV</span></div></div>
+              <div className="mini-card-grid"><div className="chart-card mini-card"><span>Conversion</span><strong>8.42%</strong><div className="mini-bars"><i /><i /><i /><i /><i /><i /><i /></div></div><div className="chart-card mini-card"><span>Top segment</span><strong>Enterprise</strong><div className="progress-track"><i /></div><small>68% of revenue mix</small></div></div>
+              <div className="dashboard-footer"><span><span className="legend-dot cyan" /> Growth</span><span><span className="legend-dot violet" /> Target</span><span>Updated just now</span></div>
             </div>
-            <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-white/5 border border-black/10 transition-all hover:scale-110 shadow-sm">
-              {isDarkMode ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-blue-600" />}
-            </button>
+            <div className="floating-insight"><span className="floating-icon"><CheckCircle2 className="h-4 w-4" /></span><div><strong>Insight found</strong><span>Revenue is trending up</span></div></div>
           </div>
         </div>
-      </nav>
+      </section>
 
-      {/* --- Mobile Top Bar (FIXED) --- */}
-      <div className="fixed top-0 left-0 w-full z-[100] md:hidden h-16 bg-white/70 dark:bg-black/40 backdrop-blur-xl border-b border-black/5 px-6 flex items-center justify-between">
-        <div className="font-black text-lg italic tracking-tighter flex items-center gap-2" onClick={() => navigateToPage('home')}>
-          <div className="w-8 h-8 overflow-hidden rounded-lg">
-            <img src={profileImage} alt="Y" className="w-full h-full object-cover" />
-          </div>
-          Y.YOUSRY
+      <section className="container-wide section-block">
+        <SectionHeading eyebrow="Selected work" title="A few dashboards, a lot of questions answered." copy="Each project starts with a business question and ends with a clearer way to act. Explore the thinking behind the visuals." />
+        <div className="project-grid-home">
+          {projects.slice(0, 3).map((project) => <ProjectCard key={project.id} project={project} onOpen={openProject} />)}
         </div>
-        <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/50 dark:bg-white/5 transition-all">
-          {isDarkMode ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-blue-600" />}
-        </button>
-      </div>
+        <button className="text-link" onClick={() => navigateToPage('projects')}>View all projects <ArrowRight className="h-4 w-4" /></button>
+      </section>
 
-      {/* تم إضافة pt-20 و pt-16 لضمان عدم اختفاء المحتوى خلف البار الثابت */}
-      <main className="pt-20 md:pt-24 pb-8 md:pb-20 relative z-10">
-        {renderContent()}
-      </main>
-
-      {/* --- Mobile Bottom Nav --- */}
-      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[400px]">
-        <nav className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl border border-black/5 dark:border-white/10 rounded-full p-2 flex items-center justify-around shadow-2xl">
+      <section className="container-wide section-block process-section">
+        <div className="process-intro"><SectionHeading eyebrow="My process" title="From raw data to a decision-ready story." copy="Good analytics is not just a chart. It is a repeatable process for asking better questions, trusting the data, and communicating what matters." /></div>
+        <div className="process-grid">
           {[
-            { id: 'home', icon: Home },
-            { id: 'about', icon: User },
-            { id: 'projects', icon: Briefcase },
-            { id: 'contact', icon: Mail }
-          ].map((item) => (
-            <button key={item.id} onClick={() => navigateToPage(item.id as Page)} className={`p-4 rounded-full transition-all ${activePage === item.id ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-400'}`}>
-              <item.icon size={20} />
-            </button>
-          ))}
-        </nav>
+            { number: '01', title: 'Understand', icon: Search, copy: 'Clarify the business question, audience, and decisions the analysis needs to support.' },
+            { number: '02', title: 'Analyze', icon: Database, copy: 'Clean, model, and interrogate the data with SQL, Python, Power Query, and DAX.' },
+            { number: '03', title: 'Visualize', icon: PieChart, copy: 'Turn the signal into an intuitive dashboard with a clear narrative and useful next steps.' },
+          ].map((step) => { const Icon = step.icon; return <div className="process-card" key={step.number}><span className="process-number">{step.number}</span><div className="process-icon"><Icon className="h-5 w-5" /></div><h3>{step.title}</h3><p>{step.copy}</p></div>; })}
+        </div>
+      </section>
+
+      <section className="container-wide callout-section"><div><p className="section-eyebrow"><Target className="h-3.5 w-3.5" /> Let’s work together</p><h2>Have a question hiding in your data?</h2><p>I’m always interested in projects where analysis can make a process simpler, a team faster, or a decision better.</p></div><button className="button-primary" onClick={() => navigateToPage('contact')}>Start a conversation <ArrowRight className="h-4 w-4" /></button></section>
+    </>
+  );
+
+  const renderProjects = () => (
+    <section className="container-wide page-shell">
+      <SectionHeading eyebrow="Selected work" title="Analytics built for action." copy="A selection of dashboards and data stories across healthcare, retail, supply chain, and business intelligence." />
+      <div className="project-grid-full">{projects.map((project) => <ProjectCard key={project.id} project={project} onOpen={openProject} expanded />)}</div>
+    </section>
+  );
+
+  const renderAbout = () => (
+    <section className="container-wide page-shell">
+      <SectionHeading eyebrow="A little about me" title="Technical enough for the data. Curious enough to find the story." copy="I combine a foundation in computer and information science with a practical focus on business intelligence. My goal is to make analysis understandable, useful, and connected to the decisions people actually need to make." />
+      <div className="about-grid">
+        <div className="about-main"><div className="about-profile"><img src={profileImage} alt="Yousef Yousry" /><div><span>Yousef Yousry</span><strong>Data Analyst & BI Developer</strong><small>Cairo, Egypt · Open to opportunities</small></div></div><p>My work sits at the intersection of data preparation, visual communication, and problem solving. I enjoy taking a complex dataset, finding the relationships that matter, and shaping them into a dashboard that a stakeholder can understand in seconds.</p><p>Whether the question is about revenue, operations, customers, or supply chain performance, I care about building a reliable analytical foundation before polishing the final visual.</p><div className="skill-pills">{['Power BI', 'SQL', 'Python', 'DAX', 'Power Query', 'Data modeling', 'Tableau', 'Looker Studio'].map((skill) => <span key={skill}>{skill}</span>)}</div></div>
+        <div className="about-side"><div className="info-card"><p className="card-label">Education & training</p>{education.map((item) => <div className="timeline-item" key={item.title}><span className="timeline-mark"><Check className="h-3 w-3" /></span><div><strong>{item.title}</strong><small>{item.detail}</small></div></div>)}</div><div className="info-card"><p className="card-label">Certifications</p><div className="cert-grid">{certifications.map((cert) => <a href={cert.url} target="_blank" rel="noreferrer" key={cert.name}>{cert.name}<ExternalLink className="h-3.5 w-3.5" /></a>)}</div></div></div>
       </div>
+    </section>
+  );
+
+  const renderContact = () => (
+    <section className="container-narrow page-shell contact-page"><SectionHeading eyebrow="Get in touch" title="Let’s make the data useful." copy="If you are looking for a data analyst who can connect the detail to the bigger picture, I would be happy to hear about what you are building." /><div className="contact-grid"><a className="contact-card contact-card-primary" href="mailto:youssefyoussry06@gmail.com"><span className="contact-icon"><Send className="h-5 w-5" /></span><span><small>Email me</small><strong>youssefyoussry06@gmail.com</strong></span><ArrowRight className="h-5 w-5" /></a><button className="contact-card" onClick={() => openExternal('https://linkedin.com/in/yousef-yousry')}><span className="contact-icon linkedin"><Linkedin className="h-5 w-5" /></span><span><small>Connect on</small><strong>LinkedIn</strong></span><ExternalLink className="h-5 w-5" /></button><button className="contact-card" onClick={() => openExternal('https://wa.me/201223160942')}><span className="contact-icon whatsapp"><MessageCircle className="h-5 w-5" /></span><span><small>Message me on</small><strong>WhatsApp</strong></span><ExternalLink className="h-5 w-5" /></button></div><div className="contact-note"><BarChart3 className="h-5 w-5" /><span>Currently open to data analyst, BI developer, and analytics opportunities.</span></div></section>
+  );
+
+  return (
+    <div className="app-shell">
+      <div className="ambient ambient-one" /><div className="ambient ambient-two" /><div className="grid-texture" />
+      <header className="site-header"><div className="container-wide header-inner"><button className="brand" onClick={() => navigateToPage('home')} aria-label="Go to Yousef Yousry home page"><span className="brand-mark">YY</span><span><strong>Yousef Yousry</strong><small>Data analyst / BI</small></span></button><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(({ id, label }) => <button key={id} className={activePage === id ? 'nav-link active' : 'nav-link'} onClick={() => navigateToPage(id)}>{label}</button>)}</nav><div className="header-actions"><button className="theme-toggle" aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'} onClick={() => setIsDarkMode(!isDarkMode)}>{isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}</button><button className="menu-toggle" aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div></div>{isMenuOpen && <nav className="mobile-menu" aria-label="Mobile navigation">{navItems.map(({ id, label, icon: Icon }) => <button key={id} onClick={() => navigateToPage(id)} className={activePage === id ? 'mobile-nav-link active' : 'mobile-nav-link'}><Icon className="h-4 w-4" />{label}</button>)}</nav>}</header>
+      <main>{activePage === 'project-detail' ? renderProjectDetail() : activePage === 'home' ? renderHome() : activePage === 'projects' ? renderProjects() : activePage === 'about' ? renderAbout() : renderContact()}</main>
+      <footer className="site-footer"><div className="container-wide footer-inner"><span>© {new Date().getFullYear()} Yousef Yousry</span><span>Built around better questions.</span><div className="footer-links"><button onClick={() => openExternal('https://github.com/YousefYousry')} aria-label="Open Yousef Yousry GitHub profile"><Github className="h-4 w-4" /></button><button onClick={() => openExternal('https://linkedin.com/in/yousef-yousry')} aria-label="Open Yousef Yousry LinkedIn profile"><Linkedin className="h-4 w-4" /></button></div></div></footer>
     </div>
   );
 }
+
+function ProjectCard({ project, onOpen, expanded = false }: { project: Project; onOpen: (id: string) => void; expanded?: boolean }) {
+  return <button className={expanded ? 'project-card project-card-expanded' : 'project-card'} onClick={() => onOpen(project.id)} aria-label={`Open ${project.title} case study`}><div className={`project-image-wrap bg-gradient-to-br ${project.accent}`}><img src={project.image} alt={`${project.title} dashboard preview`} loading="lazy" /><span className="project-number">{project.number}</span><span className="project-open"><ArrowRight className="h-5 w-5" /></span></div><div className="project-card-body"><div className="project-meta"><span>{project.category}</span><span>{project.result}</span></div><h3>{expanded ? project.title : project.shortTitle}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></div></button>;
+}
+
+export default App;

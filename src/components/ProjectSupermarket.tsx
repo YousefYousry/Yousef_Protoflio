@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { 
-  ArrowLeft, BarChart3, Database, Zap, Target, Globe, Box, 
+  ArrowLeft, BarChart3, Zap, Target, Globe, Box, 
   TrendingUp, Github, LayoutDashboard, CheckCircle2 
 } from 'lucide-react';
 

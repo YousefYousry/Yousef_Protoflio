@@ -4,7 +4,7 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { 
   ArrowLeft, TrendingUp, ShoppingCart, DollarSign, Zap, Target, 
-  Database, LayoutDashboard, Github, BarChart3, CheckCircle2 
+  LayoutDashboard, Github, BarChart3, CheckCircle2 
 } from "lucide-react";
 
 interface ProjectAdidasProps {
