@@ -153,6 +153,17 @@ function App() {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
 
+  useEffect(() => {
+    const titles: Record<Page, string> = {
+      home: 'Yousef Yousry — Data Analyst & BI Developer',
+      about: 'About Yousef Yousry — Data Analyst & BI Developer',
+      projects: 'Selected Work — Yousef Yousry',
+      contact: 'Let’s Work Together — Yousef Yousry',
+      'project-detail': 'Case Study — Yousef Yousry',
+    };
+    document.title = titles[activePage];
+  }, [activePage]);
+
   const navigateToPage = (page: Page) => {
     setActivePage(page);
     setSelectedProject(null);
@@ -188,9 +199,9 @@ function App() {
               <button className="button-secondary" onClick={() => openExternal(cvUrl)}><Download className="h-4 w-4" /> Download CV</button>
             </div>
             <div className="hero-proof">
-              <div><strong>Power BI</strong><span>Primary toolkit</span></div>
-              <div><strong>SQL + Python</strong><span>Data foundations</span></div>
-              <div><strong>End-to-end</strong><span>From question to insight</span></div>
+              <div><strong>04</strong><span>Case studies</span></div>
+              <div><strong>03</strong><span>Core tools</span></div>
+              <div><strong>01</strong><span>Question-first mindset</span></div>
             </div>
           </div>
           <div className="hero-visual" aria-label="Analytics dashboard preview">
@@ -206,6 +217,13 @@ function App() {
             <div className="floating-insight"><span className="floating-icon"><CheckCircle2 className="h-4 w-4" /></span><div><strong>Insight found</strong><span>Revenue is trending up</span></div></div>
           </div>
         </div>
+      </section>
+
+      <section className="container-wide proof-strip" aria-label="Portfolio snapshot">
+        <div className="proof-intro"><span className="proof-kicker">A practical BI toolkit</span><strong>Built to help people see the next decision.</strong></div>
+        <div className="proof-stat"><strong>04</strong><span>Analytics case studies</span></div>
+        <div className="proof-stat"><strong>08</strong><span>Core capabilities</span></div>
+        <div className="proof-stat"><strong>∞</strong><span>Curiosity behind the work</span></div>
       </section>
 
       <section className="container-wide section-block process-section">
@@ -242,7 +260,7 @@ function App() {
     <section className="container-wide page-shell">
       <SectionHeading eyebrow="A little about me" title="Technical enough for the data. Curious enough to find the story." copy="I combine a foundation in computer and information science with a practical focus on business intelligence. My goal is to make analysis understandable, useful, and connected to the decisions people actually need to make." />
       <div className="about-grid">
-        <div className="about-main"><div className="about-profile"><img src={profileImage} alt="Yousef Yousry" /><div><span>Yousef Yousry</span><strong>Data Analyst & BI Developer</strong><small>Cairo, Egypt · Open to opportunities</small></div></div><p>My work sits at the intersection of data preparation, visual communication, and problem solving. I enjoy taking a complex dataset, finding the relationships that matter, and shaping them into a dashboard that a stakeholder can understand in seconds.</p><p>Whether the question is about revenue, operations, customers, or supply chain performance, I care about building a reliable analytical foundation before polishing the final visual.</p><div className="skill-pills">{['Power BI', 'SQL', 'Python', 'DAX', 'Power Query', 'Data modeling', 'Tableau', 'Looker Studio'].map((skill) => <span key={skill}>{skill}</span>)}</div></div>
+        <div className="about-main"><div className="about-profile"><img src={profileImage} alt="Yousef Yousry" /><div><span>Yousef Yousry</span><strong>Data Analyst & BI Developer</strong><small>Cairo, Egypt · Open to opportunities</small></div></div><p>My work sits at the intersection of data preparation, visual communication, and problem solving. I enjoy taking a complex dataset, finding the relationships that matter, and shaping them into a dashboard that a stakeholder can understand in seconds.</p><p>Whether the question is about revenue, operations, customers, or supply chain performance, I care about building a reliable analytical foundation before polishing the final visual.</p><div className="skill-pills">{['Power BI', 'SQL', 'Python', 'DAX', 'Power Query', 'Data modeling', 'Tableau', 'Looker Studio'].map((skill) => <span key={skill}>{skill}</span>)}</div><div className="about-highlights"><div><span>01</span><strong>Question first</strong><small>Start with the decision, not the chart.</small></div><div><span>02</span><strong>Reliable foundations</strong><small>Clean, model, and validate before styling.</small></div><div><span>03</span><strong>Useful outcomes</strong><small>Make the insight easy to act on.</small></div></div></div>
         <div className="about-side"><div className="info-card"><p className="card-label">Education & training</p>{education.map((item) => <div className="timeline-item" key={item.title}><span className="timeline-mark"><Check className="h-3 w-3" /></span><div><strong>{item.title}</strong><small>{item.detail}</small></div></div>)}</div><div className="info-card"><p className="card-label">Certifications</p><div className="cert-grid">{certifications.map((cert) => <a href={cert.url} target="_blank" rel="noreferrer" key={cert.name}>{cert.name}<ExternalLink className="h-3.5 w-3.5" /></a>)}</div></div></div>
       </div>
     </section>
@@ -255,7 +273,7 @@ function App() {
   return (
     <div className="app-shell">
       <div className="ambient ambient-one" /><div className="ambient ambient-two" /><div className="grid-texture" />
-      <header className="site-header"><div className="container-wide header-inner"><button className="brand" onClick={() => navigateToPage('home')} aria-label="Go to Yousef Yousry home page"><span className="brand-mark">YY</span><span><strong>Yousef Yousry</strong><small>Data analyst / BI</small></span></button><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(({ id, label }) => <button key={id} className={activePage === id ? 'nav-link active' : 'nav-link'} onClick={() => navigateToPage(id)}>{label}</button>)}</nav><div className="header-actions"><button className="theme-toggle" aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'} onClick={() => setIsDarkMode(!isDarkMode)}>{isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}</button><button className="menu-toggle" aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div></div>{isMenuOpen && <nav className="mobile-menu" aria-label="Mobile navigation">{navItems.map(({ id, label, icon: Icon }) => <button key={id} onClick={() => navigateToPage(id)} className={activePage === id ? 'mobile-nav-link active' : 'mobile-nav-link'}><Icon className="h-4 w-4" />{label}</button>)}</nav>}</header>
+      <header className="site-header"><div className="container-wide header-inner"><button className="brand" onClick={() => navigateToPage('home')} aria-label="Go to Yousef Yousry home page"><span className="brand-mark">YY</span><span><strong>Yousef Yousry</strong><small>Data analyst / BI</small></span></button><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(({ id, label }) => <button key={id} className={activePage === id ? 'nav-link active' : 'nav-link'} aria-current={activePage === id ? 'page' : undefined} onClick={() => navigateToPage(id)}>{label}</button>)}</nav><div className="header-actions"><button className="theme-toggle" aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'} onClick={() => setIsDarkMode(!isDarkMode)}>{isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}</button><button className="menu-toggle" aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div></div>{isMenuOpen && <nav className="mobile-menu" aria-label="Mobile navigation">{navItems.map(({ id, label, icon: Icon }) => <button key={id} onClick={() => navigateToPage(id)} aria-current={activePage === id ? 'page' : undefined} className={activePage === id ? 'mobile-nav-link active' : 'mobile-nav-link'}><Icon className="h-4 w-4" />{label}</button>)}</nav>}</header>
       <main>{activePage === 'project-detail' ? renderProjectDetail() : activePage === 'home' ? renderHome() : activePage === 'projects' ? renderProjects() : activePage === 'about' ? renderAbout() : renderContact()}</main>
       <footer className="site-footer"><div className="container-wide footer-inner"><span>© {new Date().getFullYear()} Yousef Yousry</span><span>Built around better questions.</span><div className="footer-links"><button onClick={() => openExternal('https://github.com/YousefYousry')} aria-label="Open Yousef Yousry GitHub profile"><Github className="h-4 w-4" /></button><button onClick={() => openExternal('https://linkedin.com/in/yousef-yousry')} aria-label="Open Yousef Yousry LinkedIn profile"><Linkedin className="h-4 w-4" /></button></div></div></footer>
     </div>
@@ -263,7 +281,7 @@ function App() {
 }
 
 function ProjectCard({ project, onOpen, expanded = false }: { project: Project; onOpen: (id: string) => void; expanded?: boolean }) {
-  return <button className={expanded ? 'project-card project-card-expanded' : 'project-card'} onClick={() => onOpen(project.id)} aria-label={`Open ${project.title} case study`}><div className={`project-image-wrap bg-gradient-to-br ${project.accent}`}><img src={project.image} alt={`${project.title} dashboard preview`} loading="lazy" decoding="async" /><span className="project-number">{project.number}</span><span className="project-open"><ArrowRight className="h-5 w-5" /></span></div><div className="project-card-body"><div className="project-meta"><span>{project.category}</span><span>{project.result}</span></div><h3>{expanded ? project.title : project.shortTitle}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></div></button>;
+  return <button className={expanded ? 'project-card project-card-expanded' : 'project-card'} onClick={() => onOpen(project.id)} aria-label={`Open ${project.title} case study`}><div className={`project-image-wrap bg-gradient-to-br ${project.accent}`}><img src={project.image} alt={`${project.title} dashboard preview`} loading="lazy" decoding="async" /><span className="project-number">{project.number}</span><span className="project-open"><ArrowRight className="h-5 w-5" /></span></div><div className="project-card-body"><div className="project-meta"><span>{project.category}</span><span className="project-result"><CheckCircle2 className="h-3 w-3" />{project.result}</span></div><h3>{expanded ? project.title : project.shortTitle}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></div></button>;
 }
 
 export default App;
