@@ -41,7 +41,5 @@ export default function ProjectHealthcare(props: Props) {
       'Average length of stay is close to 18 days, creating a useful planning signal for capacity.',
     ]}
     tech={['Power BI', 'DAX', 'Power Query', 'Data modeling', 'Healthcare BI']}
-    repositoryUrl="https://github.com/YousefYousry/Healthcare-Clinical-Revenue-Analytics-Dashboard"
-    repositoryLabel="Full source & DAX logic"
   />;
 }

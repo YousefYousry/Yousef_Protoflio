@@ -36,7 +36,5 @@ export default function ProjectLookerStudio(props: Props) {
       'The Night’s Watch recorded the highest total character deaths.',
     ]}
     tech={['Looker Studio', 'Data blending', 'Calculated fields', 'Interactive filters', 'Visual storytelling']}
-    repositoryUrl="https://github.com/YousefYousry/Game-Of-Thrones-Dashboard"
-    repositoryLabel="Dashboard logic & exploration"
   />;
 }

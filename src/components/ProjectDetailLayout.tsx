@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, BarChart3, CheckCircle2, Github, LayoutDashboard, Target } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BarChart3, CheckCircle2, LayoutDashboard, Target } from 'lucide-react';
 import { useState, type ComponentType } from 'react';
 import { Button } from './ui/button';
 
@@ -33,8 +33,6 @@ export type ProjectDetailProps = {
   visualDetails: { title: string; desc: string }[];
   insights: string[];
   tech: string[];
-  repositoryUrl: string;
-  repositoryLabel: string;
   accent?: 'cyan' | 'violet' | 'orange' | 'emerald';
 };
 
@@ -57,8 +55,6 @@ export default function ProjectDetailLayout({
   visualDetails,
   insights,
   tech,
-  repositoryUrl,
-  repositoryLabel,
   accent = 'cyan',
 }: ProjectDetailProps) {
   const [activeImage, setActiveImage] = useState(0);
@@ -102,7 +98,6 @@ export default function ProjectDetailLayout({
         <aside className="detail-side-column">
           <div className="detail-panel detail-objective-panel"><div className="detail-panel-heading"><Target /><span>Strategic objective</span></div><p>{objective}</p></div>
           <div className="detail-panel detail-insights-panel"><div className="detail-panel-heading"><CheckCircle2 /><span>Key findings</span></div><div className="detail-insight-list">{insights.map((insight, i) => <div className="detail-insight" key={insight}><span>{String(i + 1).padStart(2, '0')}</span><p>{insight}</p></div>)}</div></div>
-          <div className="detail-repository-panel"><div className="detail-repository-icon"><Github /></div><div><span>Explore the build</span><strong>{repositoryLabel}</strong></div><a href={repositoryUrl} target="_blank" rel="noreferrer" className="detail-repository-link">View repository <ArrowRight /></a></div>
         </aside>
       </section>
 

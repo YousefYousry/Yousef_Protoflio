@@ -36,7 +36,5 @@ export default function ProjectAdidas(props: Props) {
       'Monthly seasonality shapes how revenue is distributed across the reporting period.',
     ]}
     tech={['Tableau Desktop', 'Tableau Prep', 'LOD expressions', 'Calculated fields', 'Data storytelling']}
-    repositoryUrl="https://github.com/YousefYousry/Adidas-US-Sales-Dashboard"
-    repositoryLabel="Tableau workbook & analysis"
   />;
 }

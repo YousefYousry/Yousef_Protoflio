@@ -36,7 +36,5 @@ export default function ProjectSupermarket(props: Props) {
       'Medium-sized deals are a consistent driver of cash flow across the portfolio.',
     ]}
     tech={['Power BI', 'DAX', 'Power Query', 'Data modeling', 'Star schema']}
-    repositoryUrl="https://github.com/YousefYousry/Sales-Dashboard"
-    repositoryLabel="Dataset & Power BI file"
   />;
 }

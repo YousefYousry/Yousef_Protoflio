@@ -222,13 +222,6 @@ function App() {
         </div>
       </section>
 
-      <section className="container-wide proof-strip" aria-label="Portfolio snapshot">
-        <div className="proof-intro"><span className="proof-kicker">A practical BI toolkit</span><strong>Built to help people see the next decision.</strong></div>
-        <div className="proof-stat"><strong>04</strong><span>Analytics case studies</span></div>
-        <div className="proof-stat"><strong>08</strong><span>Core capabilities</span></div>
-        <div className="proof-stat"><strong>∞</strong><span>Curiosity behind the work</span></div>
-      </section>
-
       <section className="container-wide section-block process-section">
         <div className="process-intro"><SectionHeading eyebrow="My process" title="From raw data to a decision-ready story." copy="Good analytics is not just a chart. It is a repeatable process for asking better questions, trusting the data, and communicating what matters." /></div>
         <div className="process-grid">
