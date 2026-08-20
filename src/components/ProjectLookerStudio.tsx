@@ -1,184 +1,42 @@
-import React from "react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { 
-  ArrowLeft, Database, Zap, Target, Users, 
-  Github, BarChart3, CheckCircle2, LayoutDashboard 
-} from "lucide-react";
+import { Database, Target, Users, Zap } from 'lucide-react';
+import ProjectDetailLayout, { type ProjectDetailProps } from './ProjectDetailLayout';
 
-interface ProjectGameOfThronesProps {
-  onBack: () => void;
-}
+type Props = Pick<ProjectDetailProps, 'onBack' | 'onNext' | 'nextProject'>;
 
-const translations = {
-  title: "Game of Thrones Intelligence",
-  subtitle: "Advanced narrative and sentiment analytics across 73 episodes and 8 seasons.",
-  stats: [
-    { label: "Houses", value: "20", icon: Target },
-    { label: "Episodes", value: "73", icon: Database },
-    { label: "Avg IMDb", value: "8.74", icon: Zap },
-    { label: "Total Viewers", value: "470.6M", icon: Users },
-  ],
-  overview: "This Power BI solution transforms fragmented series data into a cohesive analytical ecosystem. By implementing a robust Star Schema and custom DAX measures, the dashboard provides end-to-end visibility into character lifecycles, narrative weight, and audience sentiment.",
-  objective: "Correlate character screen time with survival probability and analyze the paradox between viewership peaks and declining ratings in Season 8.",
-  visualDetails: [
-    { title: "Sentiment Analysis", desc: "Correlation between script tone and IMDb ratings." },
-    { title: "Fatality Tracking", desc: "Real-time death tolls by House and Season." },
-    { title: "Screen Time Weight", desc: "Lead character presence vs. narrative impact." },
-    { title: "Viewership Trends", desc: "Growth patterns from Season 1 to the finale." }
-  ],
-  insights: [
-    "Season 8 reached peak viewership while IMDb ratings dropped sharply.",
-    "A strict ~50% fatality rate maintained across the series.",
-    "Tyrion Lannister holds the highest narrative screen-time weight.",
-    "Night’s Watch recorded the highest total character deaths.",
-  ],
-  tech: ["Power BI", "DAX Measures", "Power Query", "Star Schema"],
-};
-
-export default function ProjectGameOfThrones({ onBack }: ProjectGameOfThronesProps) {
-  const t = translations;
-  const dashboardImage = "/project-images/game-of-thrones-dashboard.webp";
-
-  return (
-    <div className="max-w-7xl mx-auto px-6 pb-24 animate-in fade-in duration-700 font-sans text-slate-950 dark:text-slate-50">
-      
-      {/* 1. Header & Navigation */}
-      <Button 
-        variant="ghost" 
-        onClick={onBack} 
-        className="mb-12 hover:bg-blue-600/5 text-muted-foreground hover:text-blue-600 font-bold uppercase text-[10px] tracking-[0.2em] rounded-full transition-all"
-      >
-        <ArrowLeft className="mr-2 w-4 h-4" /> Back to projects
-      </Button>
-
-      {/* 2. Hero Section */}
-      <div className="grid lg:grid-cols-12 gap-12 mb-20">
-        <div className="lg:col-span-5 space-y-8">
-          <div className="space-y-4">
-            <Badge className="bg-blue-600/10 text-blue-600 border-none px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
-              Narrative Analytics • Power BI
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none">
-              Westeros <span className="text-blue-600 italic">Insights</span>
-            </h1>
-            <p className="text-muted-foreground leading-relaxed italic text-sm max-w-md">
-              {t.subtitle}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            {t.stats.map((stat, i) => (
-              <div key={i} className="p-5 rounded-3xl border border-black/5 dark:border-white/5 bg-white/40 dark:bg-black/20 backdrop-blur-xl shadow-sm">
-                <stat.icon className="w-5 h-5 text-blue-600 mb-3" />
-                <div className="text-2xl font-black italic tracking-tighter leading-none">{stat.value}</div>
-                <div className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold mt-1.5">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="lg:col-span-7">
-          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-black/5">
-            <img src={dashboardImage} className="w-full h-auto" alt="Dashboard" loading="eager" decoding="async" />
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Main Content Grid */}
-      <div className="grid lg:grid-cols-12 gap-8 mb-20">
-        
-        {/* Left: Overview & Visual Details (7 Columns) */}
-        <div className="lg:col-span-7 space-y-8">
-          <Card className="p-10 border border-black/5 bg-white/40 dark:bg-black/20 backdrop-blur-3xl rounded-[2.5rem] shadow-sm flex flex-col justify-between">
-            <div className="space-y-6">
-              <div className="flex items-center gap-3">
-                <LayoutDashboard className="w-6 h-6 text-blue-600" />
-                <h3 className="text-2xl font-black italic uppercase tracking-tighter">Project Overview</h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed italic mb-8 tracking-wide">{t.overview}</p>
-            </div>
-            <div className="flex flex-wrap gap-2.5 mt-8">
-              {t.tech.map((tech) => (
-                <span key={tech} className="text-[9px] font-black uppercase tracking-widest text-blue-600 bg-white dark:bg-slate-900 px-4 py-1.5 rounded-full shadow-sm border border-blue-600/10">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </Card>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            {t.visualDetails.map((item, i) => (
-              <div key={i} className="p-6 rounded-[2rem] border border-black/5 bg-card group hover:border-blue-600/30 transition-all shadow-sm">
-                <div className="w-8 h-8 rounded-lg bg-blue-600/10 flex items-center justify-center mb-3 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <BarChart3 size={16} className="text-blue-600 group-hover:text-white" />
-                </div>
-                <div className="font-black text-[11px] uppercase italic text-foreground mb-1 tracking-wide">{item.title}</div>
-                <div className="text-[10px] text-muted-foreground italic leading-relaxed">{item.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right: Repository & Insights Consolidated (5 Columns) */}
-        <div className="lg:col-span-5 space-y-8">
-          
-          {/* GitHub Section - Now Transparent & Glassmorphism */}
-          <Card className="p-10 border border-black/5 bg-white/40 dark:bg-black/20 backdrop-blur-3xl rounded-[2.5rem] flex flex-col items-center text-center space-y-6 shadow-sm group hover:border-blue-600/20 transition-all">
-            <div className="p-4 bg-white/50 dark:bg-black/10 rounded-2xl group-hover:scale-110 transition-transform duration-700">
-              <Github className="w-10 h-10 text-foreground" />
-            </div>
-            <div className="space-y-1.5">
-              <h3 className="text-2xl font-black uppercase italic tracking-tighter leading-none">Access Repository</h3>
-              <p className="text-[10px] opacity-60 italic tracking-widest uppercase mt-1">Full Source & DAX logic</p>
-            </div>
-            <Button 
-              onClick={() => window.open("https://github.com/YousefYousry/Game-Of-Thrones-Dashboard", "_blank")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-[1.5rem] h-14 font-black uppercase italic text-[11px] tracking-widest transition-all shadow-lg shadow-blue-600/20"
-            >
-              View Repository
-            </Button>
-          </Card>
-
-          {/* Strategic Objective & Key Insights Combined in one Card */}
-          <Card className="p-10 border border-black/5 bg-white/40 dark:bg-black/20 backdrop-blur-3xl rounded-[2.5rem] space-y-10 relative overflow-hidden shadow-sm">
-            <div className="relative z-10">
-              {/* Strategic Objective Section */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <Target className="text-blue-600 w-5 h-5" />
-                  <h3 className="text-sm font-black uppercase italic tracking-tighter">Strategic Objective</h3>
-                </div>
-                <p className="text-[12px] text-muted-foreground leading-relaxed italic font-medium">
-                  {t.objective}
-                </p>
-              </div>
-
-              <div className="h-px bg-gradient-to-r from-blue-600/20 via-transparent to-transparent my-8" />
-
-              {/* Key Findings Section */}
-              <div className="space-y-6">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="text-blue-600 w-5 h-5" />
-                  <h3 className="text-sm font-black uppercase italic tracking-tighter">Key Findings</h3>
-                </div>
-                <ul className="space-y-5">
-                  {t.insights.map((insight, i) => (
-                    <li key={i} className="flex gap-4 text-[11px] italic font-bold opacity-85 leading-snug group">
-                      <span className="text-blue-600 font-black mt-0.5 group-hover:translate-x-1 transition-transform">•</span> 
-                      {insight}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            {/* Subtle Design Element */}
-            <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-blue-600/5 blur-[80px] rounded-full pointer-events-none" />
-          </Card>
-
-        </div>
-      </div>
-    </div>
-  );
+export default function ProjectLookerStudio(props: Props) {
+  return <ProjectDetailLayout {...props}
+    index="04"
+    category="Business intelligence"
+    badge="Narrative analytics · Looker Studio"
+    title="Game of Thrones Analysis"
+    subtitle="A visual exploration across 73 episodes and eight seasons, designed to connect character arcs, audience response, and narrative weight."
+    accent="violet"
+    stats={[
+      { label: 'Houses explored', value: '20', icon: Target },
+      { label: 'Episodes analyzed', value: '73', icon: Database },
+      { label: 'Average IMDb', value: '8.74', icon: Zap },
+      { label: 'Total viewers', value: '470.6M', icon: Users },
+    ]}
+    gallery={[{ label: 'Narrative overview', src: '/project-images/game-of-thrones-dashboard.webp', alt: 'Game of Thrones narrative analytics dashboard' }]}
+    overview="This Looker Studio analysis turns a rich entertainment dataset into an explorable narrative. The dashboard brings episode, season, character, house, screen-time, viewer, and rating dimensions together so users can compare the story from multiple angles."
+    challenge="A complex narrative dataset can become difficult to interpret when character, episode, audience, and rating measures are viewed separately. The challenge was to make those relationships discoverable without overwhelming the viewer."
+    approach="I organized the experience around narrative questions: who carries the story, where audience response changes, how fatalities are distributed, and whether viewership and ratings move together. Filters and comparison views keep the exploration focused."
+    outcome="The result makes a large multi-season dataset legible as a story, exposing the contrast between peak Season 8 viewership and falling ratings while keeping character and house comparisons accessible."
+    objective="Correlate character screen time, survival patterns, audience response, and ratings to reveal how narrative weight changes across the series."
+    visualDetails={[
+      { title: 'Sentiment analysis', desc: 'A comparison between script tone, episode context, and IMDb ratings.' },
+      { title: 'Fatality tracking', desc: 'Deaths explored by house, season, and narrative context for a sharper view of impact.' },
+      { title: 'Screen-time weight', desc: 'Lead-character presence compared with narrative importance across the story.' },
+      { title: 'Viewership trends', desc: 'Audience growth from Season 1 through the finale, shown alongside ratings.' },
+    ]}
+    insights={[
+      'Season 8 reached peak viewership while IMDb ratings dropped sharply.',
+      'A roughly 50% fatality rate remains a defining pattern across the series.',
+      'Tyrion Lannister holds the highest narrative screen-time weight in the analysis.',
+      'The Night’s Watch recorded the highest total character deaths.',
+    ]}
+    tech={['Looker Studio', 'Data blending', 'Calculated fields', 'Interactive filters', 'Visual storytelling']}
+    repositoryUrl="https://github.com/YousefYousry/Game-Of-Thrones-Dashboard"
+    repositoryLabel="Dashboard logic & exploration"
+  />;
 }

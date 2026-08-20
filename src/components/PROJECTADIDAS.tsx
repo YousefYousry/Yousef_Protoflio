@@ -1,183 +1,42 @@
-import React from "react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { 
-  ArrowLeft, TrendingUp, ShoppingCart, DollarSign, Zap, Target, 
-  LayoutDashboard, Github, BarChart3, CheckCircle2 
-} from "lucide-react";
+import { DollarSign, ShoppingCart, TrendingUp, Zap } from 'lucide-react';
+import ProjectDetailLayout, { type ProjectDetailProps } from './ProjectDetailLayout';
 
-interface ProjectAdidasProps {
-  onBack: () => void;
-}
+type Props = Pick<ProjectDetailProps, 'onBack' | 'onNext' | 'nextProject'>;
 
-const translations = {
-  title: "Adidas US Sales Analysis",
-  subtitle: "Advanced multi-view Tableau analytics across $61M+ in retail revenue.",
-  stats: [
-    { label: "Total Sales", value: "$61.1M", icon: DollarSign },
-    { label: "Total Profit", value: "$21.4M", icon: TrendingUp },
-    { label: "Units Sold", value: "194K", icon: ShoppingCart },
-    { label: "Avg Margin", value: "35%", icon: Zap },
-  ],
-  overview: "This Tableau solution transforms Adidas US retail data into an executive-ready analytical framework, highlighting profitability patterns, retailer benchmarking, and regional performance trends using advanced LOD expressions.",
-  objective: "Identify high-performing retailers and uncover regional profitability gaps using LOD expressions and dynamic filtering mechanisms.",
-  metrics: [
-    { title: "Retailer Benchmarking", desc: "Comparative analysis of Foot Locker vs West Gear performance." },
-    { title: "Regional Heatmaps", desc: "Geographic distribution of sales density and profit margins." },
-    { title: "Product Mix", desc: "Performance breakdown by footwear and apparel categories." },
-    { title: "LOD Calculations", desc: "Fixed level of detail expressions for accurate store averaging." }
-  ],
-  insights: [
-    "West Gear and Foot Locker dominate total revenue contribution.",
-    "Strong margin concentration observed in key metropolitan regions.",
-    "Profitability varies significantly across retail partners.",
-    "Monthly seasonality impacts revenue distribution patterns.",
-  ],
-  tech: ["Tableau Desktop", "Tableau Prep", "LOD Expressions", "Calculated Fields"],
-};
-
-export default function ProjectAdidas({ onBack }: ProjectAdidasProps) {
-  const t = translations;
-  const dashboardImage = "/project-images/adidas-dashboard.webp";
-
-  return (
-    <div className="max-w-7xl mx-auto px-6 pb-24 animate-in fade-in duration-700 font-sans">
-      
-      {/* 1. Header & Navigation */}
-      <Button 
-        variant="ghost" 
-        onClick={onBack} 
-        className="mb-12 hover:bg-blue-600/5 text-muted-foreground hover:text-blue-600 font-bold uppercase text-[10px] tracking-[0.2em] rounded-full transition-all"
-      >
-        <ArrowLeft className="mr-2 w-4 h-4" /> Back to projects
-      </Button>
-
-      {/* 2. Hero Section */}
-      <div className="grid lg:grid-cols-12 gap-12 mb-20">
-        <div className="lg:col-span-5 space-y-8">
-          <div className="space-y-4">
-            <Badge className="bg-blue-600 text-white border-none px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
-              Sales Analytics • Tableau
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-none">
-              Adidas <span className="text-blue-600 italic">US Sales</span>
-            </h1>
-            <p className="text-muted-foreground leading-relaxed italic text-sm max-w-md">
-              {t.subtitle}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            {t.stats.map((stat, i) => (
-              <div key={i} className="p-5 rounded-3xl border border-black/5 dark:border-white/5 bg-white/40 dark:bg-black/20 backdrop-blur-xl shadow-sm">
-                <stat.icon className="w-5 h-5 text-blue-600 mb-3" />
-                <div className="text-2xl font-black italic tracking-tighter leading-none">{stat.value}</div>
-                <div className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold mt-1.5">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="lg:col-span-7">
-          <div className="rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-black/5">
-            <img src={dashboardImage} className="w-full h-auto" alt="Adidas Dashboard" loading="eager" decoding="async" />
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Main Content Grid */}
-      <div className="grid lg:grid-cols-12 gap-8 mb-20">
-        
-        {/* Left: Overview & Visual Details (7 Columns) */}
-        <div className="lg:col-span-7 space-y-8">
-          <Card className="p-10 border border-black/5 bg-white/40 dark:bg-black/20 backdrop-blur-3xl rounded-[2.5rem] shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <LayoutDashboard className="w-6 h-6 text-blue-600" />
-              <h3 className="text-2xl font-black italic uppercase tracking-tighter">Executive Overview</h3>
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed italic mb-8 tracking-wide">
-              {t.overview}
-            </p>
-            <div className="flex flex-wrap gap-2.5">
-              {t.tech.map((tech) => (
-                <span key={tech} className="text-[9px] font-black uppercase tracking-widest text-blue-600 bg-white dark:bg-slate-900 px-4 py-1.5 rounded-full shadow-sm border border-blue-600/10">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </Card>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            {t.metrics.map((item, i) => (
-              <div key={i} className="p-6 rounded-[2rem] border border-black/5 bg-card group hover:border-blue-600/30 transition-all shadow-sm">
-                <div className="w-8 h-8 rounded-lg bg-blue-600/10 flex items-center justify-center mb-3 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <BarChart3 size={16} className="text-blue-600 group-hover:text-white" />
-                </div>
-                <div className="font-black text-[11px] uppercase italic text-foreground mb-1 tracking-wide">{item.title}</div>
-                <div className="text-[10px] text-muted-foreground italic leading-relaxed">{item.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right: Repository & Insights Consolidated (5 Columns) */}
-        <div className="lg:col-span-5 space-y-8">
-          
-          {/* GitHub Section - Transparent & Glassmorphism */}
-          <Card className="p-10 border border-black/5 bg-white/40 dark:bg-black/20 backdrop-blur-3xl rounded-[2.5rem] flex flex-col items-center text-center space-y-6 shadow-sm group hover:border-blue-600/20 transition-all">
-            <div className="p-4 bg-white/50 dark:bg-black/10 rounded-2xl group-hover:scale-110 transition-transform duration-700">
-              <Github className="w-10 h-10 text-foreground" />
-            </div>
-            <div className="space-y-1.5">
-              <h3 className="text-2xl font-black uppercase italic tracking-tighter leading-none">Access Repository</h3>
-              <p className="text-[10px] opacity-60 italic tracking-widest uppercase mt-1">Tableau Workbook & Data</p>
-            </div>
-            <Button 
-              onClick={() => window.open("https://github.com/YousefYousry/Adidas-US-Sales-Dashboard", "_blank")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-[1.5rem] h-14 font-black uppercase italic text-[11px] tracking-widest transition-all shadow-lg shadow-blue-600/20"
-            >
-              View Repository
-            </Button>
-          </Card>
-
-          {/* Strategic Objective & Key Insights Combined */}
-          <Card className="p-10 border border-black/5 bg-white/40 dark:bg-black/20 backdrop-blur-3xl rounded-[2.5rem] space-y-10 relative overflow-hidden shadow-sm">
-            <div className="relative z-10">
-              {/* Strategic Objective */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <Target className="text-blue-600 w-5 h-5" />
-                  <h3 className="text-sm font-black uppercase italic tracking-tighter">Strategic Objective</h3>
-                </div>
-                <p className="text-[12px] text-muted-foreground leading-relaxed italic font-medium">
-                  {t.objective}
-                </p>
-              </div>
-
-              <div className="h-px bg-gradient-to-r from-blue-600/20 via-transparent to-transparent my-8" />
-
-              {/* Key Findings */}
-              <div className="space-y-6">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="text-blue-600 w-5 h-5" />
-                  <h3 className="text-sm font-black uppercase italic tracking-tighter">Key Findings</h3>
-                </div>
-                <ul className="space-y-5">
-                  {t.insights.map((insight, i) => (
-                    <li key={i} className="flex gap-4 text-[11px] italic font-bold opacity-85 leading-snug group">
-                      <span className="text-blue-600 font-black mt-0.5 group-hover:translate-x-1 transition-transform">•</span> 
-                      {insight}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-blue-600/5 blur-[80px] rounded-full pointer-events-none" />
-          </Card>
-
-        </div>
-      </div>
-    </div>
-  );
+export default function ProjectAdidas(props: Props) {
+  return <ProjectDetailLayout {...props}
+    index="02"
+    category="Sales analytics"
+    badge="Retail performance · Tableau"
+    title="Adidas US Sales Analysis"
+    subtitle="A multi-view Tableau analysis that turns $61M+ in retail revenue into a clearer picture of product, retailer, region, and channel performance."
+    accent="orange"
+    stats={[
+      { label: 'Total sales', value: '$61.1M', icon: DollarSign },
+      { label: 'Total profit', value: '$21.4M', icon: TrendingUp },
+      { label: 'Units sold', value: '194K', icon: ShoppingCart },
+      { label: 'Average margin', value: '35%', icon: Zap },
+    ]}
+    gallery={[{ label: 'Executive dashboard', src: '/project-images/adidas-dashboard.webp', alt: 'Adidas US sales Tableau dashboard' }]}
+    overview="This Tableau solution transforms Adidas US retail data into an executive-ready analytical framework. It combines retailer benchmarking, regional performance, product mix, and calculated fields to make commercial patterns easier to compare."
+    challenge="A broad retail dataset can show what sold without explaining which partner, region, or product combination is creating the strongest commercial result."
+    approach="I organized the analysis around retailer, region, product category, and time. Tableau LOD expressions and calculated fields support comparable views instead of isolated totals, making the dashboard useful for performance review."
+    outcome="The resulting dashboard clarifies channel contribution, margin patterns, and regional gaps so commercial teams can move from a sales total to a more specific performance question."
+    objective="Identify high-performing retailers and uncover regional profitability gaps through clear comparative views and dynamic filtering."
+    visualDetails={[
+      { title: 'Retailer benchmarking', desc: 'Comparative views of Foot Locker, West Gear, and other partners against shared KPIs.' },
+      { title: 'Regional heatmaps', desc: 'Geographic distribution of sales density and profit margins across the US.' },
+      { title: 'Product mix', desc: 'Performance breakdown across footwear, apparel, and product-level categories.' },
+      { title: 'LOD calculations', desc: 'Fixed level-of-detail expressions for more reliable store and retailer comparisons.' },
+    ]}
+    insights={[
+      'West Gear and Foot Locker dominate total revenue contribution across the retailer set.',
+      'Strong margin concentration appears in key metropolitan regions.',
+      'Profitability varies materially across retail partners, making benchmarking useful for action.',
+      'Monthly seasonality shapes how revenue is distributed across the reporting period.',
+    ]}
+    tech={['Tableau Desktop', 'Tableau Prep', 'LOD expressions', 'Calculated fields', 'Data storytelling']}
+    repositoryUrl="https://github.com/YousefYousry/Adidas-US-Sales-Dashboard"
+    repositoryLabel="Tableau workbook & analysis"
+  />;
 }

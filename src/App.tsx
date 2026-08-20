@@ -178,10 +178,13 @@ function App() {
   };
 
   const renderProjectDetail = () => {
-    if (selectedProject === 'healthcare-dash') return <ProjectHealthcare onBack={() => navigateToPage('projects')} />;
-    if (selectedProject === 'supermarket') return <ProjectSupermarket onBack={() => navigateToPage('projects')} />;
-    if (selectedProject === 'looker') return <ProjectLookerStudio onBack={() => navigateToPage('projects')} />;
-    if (selectedProject === 'adidas-tableau') return <PROJECTADIDAS onBack={() => navigateToPage('projects')} />;
+    const currentIndex = projects.findIndex((project) => project.id === selectedProject);
+    const next = currentIndex >= 0 ? projects[(currentIndex + 1) % projects.length] : undefined;
+    const detailNavigation = { onBack: () => navigateToPage('projects'), onNext: next ? () => openProject(next.id) : undefined, nextProject: next ? { number: next.number, title: next.title, category: next.category } : undefined };
+    if (selectedProject === 'healthcare-dash') return <ProjectHealthcare {...detailNavigation} />;
+    if (selectedProject === 'supermarket') return <ProjectSupermarket {...detailNavigation} />;
+    if (selectedProject === 'looker') return <ProjectLookerStudio {...detailNavigation} />;
+    if (selectedProject === 'adidas-tableau') return <PROJECTADIDAS {...detailNavigation} />;
     return null;
   };
 
