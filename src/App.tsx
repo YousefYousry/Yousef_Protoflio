@@ -63,7 +63,7 @@ const projects: Project[] = [
     shortTitle: 'Clinical revenue intelligence',
     category: 'Healthcare analytics',
     description: 'A Power BI reporting system connecting 40K admissions, clinical conditions, insurance providers, and billing outcomes.',
-    image: 'https://i.postimg.cc/zvc0HtCf/Doctor-cradling-glowing-202603190458.jpg',
+    image: '/project-images/healthcare-preview.webp',
     tools: ['Power BI', 'DAX', 'Power Query'],
     result: '$1Bn revenue analyzed',
     accent: 'from-cyan-500/80 to-blue-700/80',
@@ -75,7 +75,7 @@ const projects: Project[] = [
     shortTitle: 'Retail performance dashboard',
     category: 'Sales analytics',
     description: 'A decision-ready view of product, retailer, region, and channel performance for faster commercial analysis.',
-    image: 'https://i.ibb.co/BHfmYpvH/image.jpg',
+    image: '/project-images/adidas-preview.webp',
     tools: ['Tableau', 'Data storytelling', 'KPIs'],
     result: 'Channel performance clarified',
     accent: 'from-orange-400/80 to-rose-600/80',
@@ -87,7 +87,7 @@ const projects: Project[] = [
     shortTitle: 'Supply chain visibility',
     category: 'Supply chain analytics',
     description: 'An interactive analysis of global supermarket sales built to reveal product, market, and profitability patterns.',
-    image: 'https://i.ibb.co/CRG14nw/9a0c027694a7b25c293fa83b1abc061b.jpg',
+    image: '/project-images/supermarket-preview.webp',
     tools: ['Power BI', 'Data modeling', 'Reporting'],
     result: 'Global trends surfaced',
     accent: 'from-emerald-400/80 to-teal-700/80',
@@ -99,7 +99,7 @@ const projects: Project[] = [
     shortTitle: 'Narrative data exploration',
     category: 'Business intelligence',
     description: 'A visual exploration that turns a rich dataset into a clear narrative using filters, comparisons, and focused storytelling.',
-    image: 'https://i.ibb.co/bgKX2kH6/815c1250ff6db53e8455e98739f9f628.jpg',
+    image: '/project-images/game-of-thrones-preview.webp',
     tools: ['Looker Studio', 'Exploration', 'Visual design'],
     result: 'Complex data made legible',
     accent: 'from-violet-500/80 to-indigo-700/80',
@@ -263,7 +263,7 @@ function App() {
 }
 
 function ProjectCard({ project, onOpen, expanded = false }: { project: Project; onOpen: (id: string) => void; expanded?: boolean }) {
-  return <button className={expanded ? 'project-card project-card-expanded' : 'project-card'} onClick={() => onOpen(project.id)} aria-label={`Open ${project.title} case study`}><div className={`project-image-wrap bg-gradient-to-br ${project.accent}`}><img src={project.image} alt={`${project.title} dashboard preview`} loading="lazy" /><span className="project-number">{project.number}</span><span className="project-open"><ArrowRight className="h-5 w-5" /></span></div><div className="project-card-body"><div className="project-meta"><span>{project.category}</span><span>{project.result}</span></div><h3>{expanded ? project.title : project.shortTitle}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></div></button>;
+  return <button className={expanded ? 'project-card project-card-expanded' : 'project-card'} onClick={() => onOpen(project.id)} aria-label={`Open ${project.title} case study`}><div className={`project-image-wrap bg-gradient-to-br ${project.accent}`}><img src={project.image} alt={`${project.title} dashboard preview`} loading="lazy" decoding="async" /><span className="project-number">{project.number}</span><span className="project-open"><ArrowRight className="h-5 w-5" /></span></div><div className="project-card-body"><div className="project-meta"><span>{project.category}</span><span>{project.result}</span></div><h3>{expanded ? project.title : project.shortTitle}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></div></button>;
 }
 
 export default App;

@@ -15,9 +15,9 @@ export default function ProjectHealthcare({ onBack }: ProjectHealthcareProps) {
   const [activeTab, setActiveTab] = useState(0);
   
   const dashboardImages = [
-    "https://i.postimg.cc/KvJyJBFF/healthcare-1-of-3.png",
-    "https://i.postimg.cc/jqhVSPDT/healthcare-2-of-3.png",
-    "https://i.postimg.cc/d0CpPyMF/healthcare-3-of-3.png"
+    "/project-images/healthcare-1.webp",
+    "/project-images/healthcare-2.webp",
+    "/project-images/healthcare-3.webp"
   ];
 
   const tabNames = ["Overview", "Clinical", "Financial"];
@@ -97,7 +97,7 @@ export default function ProjectHealthcare({ onBack }: ProjectHealthcareProps) {
               key={activeTab}
               src={dashboardImages[activeTab]} 
               className="w-full h-auto animate-in fade-in slide-in-from-right-4 duration-500" 
-              alt={tabNames[activeTab]} 
+              alt={tabNames[activeTab]} loading="eager" decoding="async" 
             />
           </div>
         </div>

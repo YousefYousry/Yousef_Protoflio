@@ -39,7 +39,7 @@ const translations = {
 
 export default function ProjectAdidas({ onBack }: ProjectAdidasProps) {
   const t = translations;
-  const dashboardImage = "https://i.ibb.co/V04YFFMz/380147147-af9835d5-3eee-4f10-b2fc-485b6ca879f7.png";
+  const dashboardImage = "/project-images/adidas-dashboard.webp";
 
   return (
     <div className="max-w-7xl mx-auto px-6 pb-24 animate-in fade-in duration-700 font-sans">
@@ -81,7 +81,7 @@ export default function ProjectAdidas({ onBack }: ProjectAdidasProps) {
 
         <div className="lg:col-span-7">
           <div className="rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-black/5">
-            <img src={dashboardImage} className="w-full h-auto" alt="Adidas Dashboard" />
+            <img src={dashboardImage} className="w-full h-auto" alt="Adidas Dashboard" loading="eager" decoding="async" />
           </div>
         </div>
       </div>

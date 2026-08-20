@@ -39,7 +39,7 @@ const translations = {
 
 export default function ProjectGameOfThrones({ onBack }: ProjectGameOfThronesProps) {
   const t = translations;
-  const dashboardImage = "https://i.ibb.co/j92BdMXF/Game-of-Thrones-Dashboard-2-1-of-1.png";
+  const dashboardImage = "/project-images/game-of-thrones-dashboard.webp";
 
   return (
     <div className="max-w-7xl mx-auto px-6 pb-24 animate-in fade-in duration-700 font-sans text-slate-950 dark:text-slate-50">
@@ -81,7 +81,7 @@ export default function ProjectGameOfThrones({ onBack }: ProjectGameOfThronesPro
 
         <div className="lg:col-span-7">
           <div className="rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] border border-black/5">
-            <img src={dashboardImage} className="w-full h-auto" alt="Dashboard" />
+            <img src={dashboardImage} className="w-full h-auto" alt="Dashboard" loading="eager" decoding="async" />
           </div>
         </div>
       </div>
