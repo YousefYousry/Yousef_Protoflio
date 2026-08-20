@@ -126,7 +126,7 @@ const certifications = [
   { name: 'Data Manipulation with pandas', url: 'https://drive.google.com/file/d/1ITKp9ErKKPqSGYNv0jXsJC3ZXPk4a4cU/view?usp=sharing' },
 ];
 
-const cvUrl = 'https://drive.google.com/file/d/1cRK5JFwnZlU9Dr3wHI8wUPL1f3BWBIqD/view?usp=sharing';
+const cvUrl = '/Yousef_Yousry_CV.pdf';
 
 function openExternal(url: string) {
   window.open(url, '_blank', 'noopener,noreferrer');
