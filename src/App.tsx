@@ -208,14 +208,6 @@ function App() {
         </div>
       </section>
 
-      <section className="container-wide section-block">
-        <SectionHeading eyebrow="Selected work" title="A few dashboards, a lot of questions answered." copy="Each project starts with a business question and ends with a clearer way to act. Explore the thinking behind the visuals." />
-        <div className="project-grid-home">
-          {projects.slice(0, 3).map((project) => <ProjectCard key={project.id} project={project} onOpen={openProject} />)}
-        </div>
-        <button className="text-link" onClick={() => navigateToPage('projects')}>View all projects <ArrowRight className="h-4 w-4" /></button>
-      </section>
-
       <section className="container-wide section-block process-section">
         <div className="process-intro"><SectionHeading eyebrow="My process" title="From raw data to a decision-ready story." copy="Good analytics is not just a chart. It is a repeatable process for asking better questions, trusting the data, and communicating what matters." /></div>
         <div className="process-grid">
@@ -225,6 +217,14 @@ function App() {
             { number: '03', title: 'Visualize', icon: PieChart, copy: 'Turn the signal into an intuitive dashboard with a clear narrative and useful next steps.' },
           ].map((step) => { const Icon = step.icon; return <div className="process-card" key={step.number}><span className="process-number">{step.number}</span><div className="process-icon"><Icon className="h-5 w-5" /></div><h3>{step.title}</h3><p>{step.copy}</p></div>; })}
         </div>
+      </section>
+
+      <section className="container-wide section-block">
+        <SectionHeading eyebrow="Selected work" title="A few dashboards, a lot of questions answered." copy="Each project starts with a business question and ends with a clearer way to act. Explore the thinking behind the visuals." />
+        <div className="project-grid-home">
+          {projects.slice(0, 3).map((project) => <ProjectCard key={project.id} project={project} onOpen={openProject} />)}
+        </div>
+        <button className="text-link" onClick={() => navigateToPage('projects')}>View all projects <ArrowRight className="h-4 w-4" /></button>
       </section>
 
       <section className="container-wide callout-section"><div><p className="section-eyebrow"><Target className="h-3.5 w-3.5" /> Let’s work together</p><h2>Have a question hiding in your data?</h2><p>I’m always interested in projects where analysis can make a process simpler, a team faster, or a decision better.</p></div><button className="button-primary" onClick={() => navigateToPage('contact')}>Start a conversation <ArrowRight className="h-4 w-4" /></button></section>
