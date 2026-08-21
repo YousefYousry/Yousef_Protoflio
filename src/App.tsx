@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import {
   Activity,
   ArrowRight,
-  BarChart3,
   BriefcaseBusiness,
   Check,
   CheckCircle2,
@@ -15,10 +14,8 @@ import {
   Mail,
   Menu,
   Moon,
-  MessageCircle,
   PieChart,
   Search,
-  Send,
   Sparkles,
   Sun,
   Target,
@@ -114,6 +111,10 @@ const education = [
   {
     title: 'Business Intelligence Development — ITI',
     detail: 'Practical training in analytics, databases, and BI development',
+  },
+  {
+    title: 'Microsoft Power BI Specialist — DEPI',
+    detail: 'Digital Egypt Pioneers Initiative · Specialized Power BI training',
   },
 ];
 
@@ -263,7 +264,16 @@ function App() {
   );
 
   const renderContact = () => (
-    <section className="container-narrow page-shell contact-page"><SectionHeading eyebrow="Get in touch" title="Let’s make the data useful." copy="If you are looking for a data analyst who can connect the detail to the bigger picture, I would be happy to hear about what you are building." /><div className="contact-grid"><a className="contact-card contact-card-primary" href="mailto:youssefyoussry06@gmail.com"><span className="contact-icon"><Send className="h-5 w-5" /></span><span><small>Email me</small><strong>youssefyoussry06@gmail.com</strong></span><ArrowRight className="h-5 w-5" /></a><button className="contact-card" onClick={() => openExternal('https://linkedin.com/in/yousef-yousry')}><span className="contact-icon linkedin"><Linkedin className="h-5 w-5" /></span><span><small>Connect on</small><strong>LinkedIn</strong></span><ExternalLink className="h-5 w-5" /></button><button className="contact-card" onClick={() => openExternal('https://wa.me/201223160942')}><span className="contact-icon whatsapp"><MessageCircle className="h-5 w-5" /></span><span><small>Message me on</small><strong>WhatsApp</strong></span><ExternalLink className="h-5 w-5" /></button></div><div className="contact-note"><BarChart3 className="h-5 w-5" /><span>Currently open to data analyst, BI developer, and analytics opportunities.</span></div></section>
+    <section className="container-wide page-shell contact-page">
+      <div className="contact-final-intro">
+        <p className="section-eyebrow"><Mail className="h-3.5 w-3.5" /> Contact / Let’s connect</p>
+        <p>For questions about data, reporting, or your next dashboard.</p>
+      </div>
+      <div className="contact-variant contact-variant-hybrid">
+        <div className="hybrid-heading"><p className="section-eyebrow">LET’S CONNECT</p><h1>Let’s make the next step clear.</h1><p>Have a question about your data, reporting, or next dashboard? Send a note and I’ll get back to you.</p></div>
+        <div className="hybrid-actions"><a href="mailto:yousefyousry06@gmail.com"><span>01</span><strong>Email me directly</strong><em>yousefyousry06@gmail.com</em><ArrowRight className="h-4 w-4" /></a><button onClick={() => openExternal('https://linkedin.com/in/yousef-yousry')}><span>02</span><strong>Connect on LinkedIn</strong><em>Professional profile and background</em><ExternalLink className="h-4 w-4" /></button><button onClick={() => openExternal('https://wa.me/201223160942')}><span>03</span><strong>Message on WhatsApp</strong><em>Quick message and availability</em><ExternalLink className="h-4 w-4" /></button></div>
+      </div>
+    </section>
   );
 
   return (
