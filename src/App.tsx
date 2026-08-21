@@ -27,7 +27,7 @@ import ProjectHealthcare from './components/ProjectHealthcare';
 import ProjectSupermarket from './components/ProjectSupermarket';
 import ProjectLookerStudio from './components/ProjectLookerStudio';
 import PROJECTADIDAS from './components/PROJECTADIDAS';
-import profileImage from './assets/unnamed.png';
+import profileImage from './assets/unnamed.webp';
 import './App.css';
 
 type Page = 'home' | 'about' | 'projects' | 'contact' | 'project-detail';
@@ -129,13 +129,41 @@ const certifications = [
 
 const cvUrl = '/Yousef_Yousry_CV.pdf';
 
+function useScrollReveal(revision: string) {
+  useEffect(() => {
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reducedMotion) {
+      revealItems.forEach((item) => item.classList.add('is-revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle('is-revealed', entry.isIntersecting);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    );
+
+    revealItems.forEach((item, index) => {
+      item.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 65}ms`);
+      observer.observe(item);
+    });
+
+    return () => observer.disconnect();
+  }, [revision]);
+}
+
 function openExternal(url: string) {
   window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 function SectionHeading({ eyebrow, title, copy }: { eyebrow: string; title: string; copy?: string }) {
   return (
-    <div className="max-w-2xl space-y-4">
+    <div className="max-w-2xl space-y-4" data-reveal="left">
       <p className="section-eyebrow"><Sparkles className="h-3.5 w-3.5" /> {eyebrow}</p>
       <h2 className="section-title">{title}</h2>
       {copy && <p className="section-copy">{copy}</p>}
@@ -148,6 +176,8 @@ function App() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useScrollReveal(`${activePage}-${selectedProject ?? 'none'}`);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkMode);
@@ -191,7 +221,7 @@ function App() {
 
   const renderHome = () => (
     <>
-      <section className="hero-shell container-wide">
+      <section className="hero-shell container-wide" data-reveal="up">
         <div className="hero-grid">
           <div className="hero-copy">
             <div className="status-pill"><span className="status-dot" /> Available for analytics opportunities</div>
@@ -223,18 +253,18 @@ function App() {
         </div>
       </section>
 
-      <section className="container-wide section-block process-section">
+      <section className="container-wide section-block process-section" data-reveal="up">
         <div className="process-intro"><SectionHeading eyebrow="My process" title="From raw data to a decision-ready story." copy="Good analytics is not just a chart. It is a repeatable process for asking better questions, trusting the data, and communicating what matters." /></div>
         <div className="process-grid">
           {[
             { number: '01', title: 'Understand', icon: Search, copy: 'Clarify the business question, audience, and decisions the analysis needs to support.' },
             { number: '02', title: 'Analyze', icon: Database, copy: 'Clean, model, and interrogate the data with SQL, Python, Power Query, and DAX.' },
             { number: '03', title: 'Visualize', icon: PieChart, copy: 'Turn the signal into an intuitive dashboard with a clear narrative and useful next steps.' },
-          ].map((step) => { const Icon = step.icon; return <div className="process-card" key={step.number}><span className="process-number">{step.number}</span><div className="process-icon"><Icon className="h-5 w-5" /></div><h3>{step.title}</h3><p>{step.copy}</p></div>; })}
+          ].map((step) => { const Icon = step.icon; return <div className="process-card" key={step.number} data-reveal="pop"><span className="process-number">{step.number}</span><div className="process-icon" data-reveal="pop"><Icon className="h-5 w-5" /></div><h3>{step.title}</h3><p>{step.copy}</p></div>; })}
         </div>
       </section>
 
-      <section className="container-wide section-block">
+      <section className="container-wide section-block" data-reveal="up">
         <SectionHeading eyebrow="Selected work" title="A few dashboards, a lot of questions answered." copy="Each project starts with a business question and ends with a clearer way to act. Explore the thinking behind the visuals." />
         <div className="project-grid-home">
           {projects.slice(0, 3).map((project) => <ProjectCard key={project.id} project={project} onOpen={openProject} />)}
@@ -242,34 +272,34 @@ function App() {
         <button className="text-link" onClick={() => navigateToPage('projects')}>View all projects <ArrowRight className="h-4 w-4" /></button>
       </section>
 
-      <section className="container-wide callout-section"><div><p className="section-eyebrow"><Target className="h-3.5 w-3.5" /> Let’s work together</p><h2>Have a question hiding in your data?</h2><p>I’m always interested in projects where analysis can make a process simpler, a team faster, or a decision better.</p></div><button className="button-primary" onClick={() => navigateToPage('contact')}>Start a conversation <ArrowRight className="h-4 w-4" /></button></section>
+      <section className="container-wide callout-section" data-reveal="pop"><div><p className="section-eyebrow"><Target className="h-3.5 w-3.5" /> Let’s work together</p><h2>Have a question hiding in your data?</h2><p>I’m always interested in projects where analysis can make a process simpler, a team faster, or a decision better.</p></div><button className="button-primary" onClick={() => navigateToPage('contact')}>Start a conversation <ArrowRight className="h-4 w-4" /></button></section>
     </>
   );
 
   const renderProjects = () => (
-    <section className="container-wide page-shell">
+    <section className="container-wide page-shell" data-reveal="up">
       <SectionHeading eyebrow="Selected work" title="Analytics built for action." copy="A selection of dashboards and data stories across healthcare, retail, supply chain, and business intelligence." />
       <div className="project-grid-full">{projects.map((project) => <ProjectCard key={project.id} project={project} onOpen={openProject} expanded />)}</div>
     </section>
   );
 
   const renderAbout = () => (
-    <section className="container-wide page-shell">
+    <section className="container-wide page-shell" data-reveal="up">
       <SectionHeading eyebrow="A little about me" title="Technical enough for the data. Curious enough to find the story." copy="I combine a foundation in computer and information science with a practical focus on business intelligence. My goal is to make analysis understandable, useful, and connected to the decisions people actually need to make." />
       <div className="about-grid">
-        <div className="about-main"><div className="about-profile"><img src={profileImage} alt="Yousef Yousry" /><div><span>Yousef Yousry</span><strong>Data Analyst & BI Developer</strong><small>Cairo, Egypt · Open to opportunities</small></div></div><p>My work sits at the intersection of data preparation, visual communication, and problem solving. I enjoy taking a complex dataset, finding the relationships that matter, and shaping them into a dashboard that a stakeholder can understand in seconds.</p><p>Whether the question is about revenue, operations, customers, or supply chain performance, I care about building a reliable analytical foundation before polishing the final visual.</p><div className="skill-pills">{['Power BI', 'SQL', 'Python', 'DAX', 'Power Query', 'Data modeling', 'Tableau', 'Looker Studio'].map((skill) => <span key={skill}>{skill}</span>)}</div><div className="about-highlights"><div><span>01</span><strong>Question first</strong><small>Start with the decision, not the chart.</small></div><div><span>02</span><strong>Reliable foundations</strong><small>Clean, model, and validate before styling.</small></div><div><span>03</span><strong>Useful outcomes</strong><small>Make the insight easy to act on.</small></div></div></div>
-        <div className="about-side"><div className="info-card"><p className="card-label">Education & training</p>{education.map((item) => <div className="timeline-item" key={item.title}><span className="timeline-mark"><Check className="h-3 w-3" /></span><div><strong>{item.title}</strong><small>{item.detail}</small></div></div>)}</div><div className="info-card"><p className="card-label">Certifications</p><div className="cert-grid">{certifications.map((cert) => <a href={cert.url} target="_blank" rel="noreferrer" key={cert.name}>{cert.name}<ExternalLink className="h-3.5 w-3.5" /></a>)}</div></div></div>
+        <div className="about-main" data-reveal="left"><div className="about-profile"><img src={profileImage} alt="Yousef Yousry" loading="lazy" decoding="async" /><div><span>Yousef Yousry</span><strong>Data Analyst & BI Developer</strong><small>Cairo, Egypt · Open to opportunities</small></div></div><p>My work sits at the intersection of data preparation, visual communication, and problem solving. I enjoy taking a complex dataset, finding the relationships that matter, and shaping them into a dashboard that a stakeholder can understand in seconds.</p><p>Whether the question is about revenue, operations, customers, or supply chain performance, I care about building a reliable analytical foundation before polishing the final visual.</p><div className="skill-pills">{['Power BI', 'SQL', 'Python', 'DAX', 'Power Query', 'Data modeling', 'Tableau', 'Looker Studio'].map((skill) => <span key={skill}>{skill}</span>)}</div><div className="about-highlights"><div data-reveal="pop"><span>01</span><strong>Question first</strong><small>Start with the decision, not the chart.</small></div><div data-reveal="pop"><span>02</span><strong>Reliable foundations</strong><small>Clean, model, and validate before styling.</small></div><div data-reveal="pop"><span>03</span><strong>Useful outcomes</strong><small>Make the insight easy to act on.</small></div></div></div>
+        <div className="about-side" data-reveal="right"><div className="info-card" data-reveal="pop"><p className="card-label">Education & training</p>{education.map((item) => <div className="timeline-item" key={item.title}><span className="timeline-mark"><Check className="h-3 w-3" /></span><div><strong>{item.title}</strong><small>{item.detail}</small></div></div>)}</div><div className="info-card" data-reveal="pop"><p className="card-label">Certifications</p><div className="cert-grid">{certifications.map((cert) => <a href={cert.url} target="_blank" rel="noreferrer" key={cert.name}>{cert.name}<ExternalLink className="h-3.5 w-3.5" /></a>)}</div></div></div>
       </div>
     </section>
   );
 
   const renderContact = () => (
-    <section className="container-wide page-shell contact-page">
-      <div className="contact-final-intro">
+    <section className="container-wide page-shell contact-page" data-reveal="up">
+      <div className="contact-final-intro" data-reveal="left">
         <p className="section-eyebrow"><Mail className="h-3.5 w-3.5" /> Contact / Let’s connect</p>
         <p>For questions about data, reporting, or your next dashboard.</p>
       </div>
-      <div className="contact-variant contact-variant-hybrid">
+      <div className="contact-variant contact-variant-hybrid" data-reveal="right">
         <div className="hybrid-heading"><p className="section-eyebrow">LET’S CONNECT</p><h1>Let’s make the next step clear.</h1><p>Have a question about your data, reporting, or next dashboard? Send a note and I’ll get back to you.</p></div>
         <div className="hybrid-actions"><a href="mailto:yousefyousry06@gmail.com"><span>01</span><strong>Email me directly</strong><em>yousefyousry06@gmail.com</em><ArrowRight className="h-4 w-4" /></a><button onClick={() => openExternal('https://linkedin.com/in/yousef-yousry')}><span>02</span><strong>Connect on LinkedIn</strong><em>Professional profile and background</em><ExternalLink className="h-4 w-4" /></button><button onClick={() => openExternal('https://wa.me/201223160942')}><span>03</span><strong>Message on WhatsApp</strong><em>Quick message and availability</em><ExternalLink className="h-4 w-4" /></button></div>
       </div>
@@ -287,7 +317,7 @@ function App() {
 }
 
 function ProjectCard({ project, onOpen, expanded = false }: { project: Project; onOpen: (id: string) => void; expanded?: boolean }) {
-  return <button className={expanded ? 'project-card project-card-expanded' : 'project-card'} onClick={() => onOpen(project.id)} aria-label={`Open ${project.title} case study`}><div className={`project-image-wrap bg-gradient-to-br ${project.accent}`}><img src={project.image} alt={`${project.title} dashboard preview`} loading="lazy" decoding="async" /><span className="project-number">{project.number}</span><span className="project-open"><ArrowRight className="h-5 w-5" /></span></div><div className="project-card-body"><div className="project-meta"><span>{project.category}</span><span className="project-result"><CheckCircle2 className="h-3 w-3" />{project.result}</span></div><h3>{expanded ? project.title : project.shortTitle}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></div></button>;
+  return <button data-reveal="pop" className={expanded ? 'project-card project-card-expanded' : 'project-card'} onClick={() => onOpen(project.id)} aria-label={`Open ${project.title} case study`}><div className={`project-image-wrap bg-gradient-to-br ${project.accent}`} data-reveal="right"><img src={project.image} alt={`${project.title} dashboard preview`} loading="lazy" decoding="async" /><span className="project-number">{project.number}</span><span className="project-open"><ArrowRight className="h-5 w-5" /></span></div><div className="project-card-body" data-reveal="up"><div className="project-meta"><span>{project.category}</span><span className="project-result"><CheckCircle2 className="h-3 w-3" />{project.result}</span></div><h3>{expanded ? project.title : project.shortTitle}</h3><p>{project.description}</p><div className="project-tools">{project.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></div></button>;
 }
 
 export default App;

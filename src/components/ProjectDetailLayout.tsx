@@ -78,26 +78,26 @@ export default function ProjectDetailLayout({
           <div className="detail-meta-row"><span>Role <strong>Data analyst / BI developer</strong></span><span>Focus <strong>Decision-ready reporting</strong></span></div>
         </div>
         <div className="detail-hero-visual">
-          <div className="detail-image-frame"><img key={currentImage.src} src={currentImage.src} alt={currentImage.alt} loading="eager" decoding="async" /></div>
+          <div className="detail-image-frame" data-reveal="right"><img key={currentImage.src} src={currentImage.src} alt={currentImage.alt} loading="eager" decoding="async" /></div>
           {gallery.length > 1 && <div className="detail-gallery-tabs" role="tablist" aria-label={`${title} dashboard views`}>{gallery.map((item, i) => <button key={item.label} role="tab" aria-selected={activeImage === i} className={activeImage === i ? 'detail-gallery-tab active' : 'detail-gallery-tab'} onClick={() => setActiveImage(i)}>{String(i + 1).padStart(2, '0')} {item.label}</button>)}</div>}
           <p className="detail-image-caption">{currentImage.label} · Dashboard preview</p>
         </div>
       </section>
 
       <section className="detail-stats" aria-label={`${title} project metrics`}>
-        {stats.map(({ label, value, icon: Icon }) => <div className="detail-stat" key={label}><Icon className="detail-stat-icon" /><strong>{value}</strong><span>{label}</span></div>)}
+        {stats.map(({ label, value, icon: Icon }) => <div className="detail-stat" data-reveal="pop" key={label}><Icon className="detail-stat-icon" /><strong>{value}</strong><span>{label}</span></div>)}
       </section>
 
       <section className="detail-story-grid">
         <div className="detail-main-column">
-          <div className="detail-panel detail-overview-panel"><div className="detail-panel-heading"><LayoutDashboard /><span>Project overview</span></div><p>{overview}</p><div className="detail-tech-list">{tech.map((item) => <span key={item}>{item}</span>)}</div></div>
-          <div className="detail-narrative-grid"><div className="detail-narrative-card"><span className="detail-card-number">01 / Challenge</span><p>{challenge}</p></div><div className="detail-narrative-card"><span className="detail-card-number">02 / Approach</span><p>{approach}</p></div><div className="detail-narrative-card detail-narrative-card-accent"><span className="detail-card-number">03 / Outcome</span><p>{outcome}</p></div></div>
+          <div className="detail-panel detail-overview-panel" data-reveal="left"><div className="detail-panel-heading"><LayoutDashboard /><span>Project overview</span></div><p>{overview}</p><div className="detail-tech-list">{tech.map((item) => <span key={item}>{item}</span>)}</div></div>
+          <div className="detail-narrative-grid"><div className="detail-narrative-card" data-reveal="pop"><span className="detail-card-number">01 / Challenge</span><p>{challenge}</p></div><div className="detail-narrative-card" data-reveal="pop"><span className="detail-card-number">02 / Approach</span><p>{approach}</p></div><div className="detail-narrative-card detail-narrative-card-accent" data-reveal="pop"><span className="detail-card-number">03 / Outcome</span><p>{outcome}</p></div></div>
           <div className="detail-section-heading"><span>How the dashboard works</span><p>The analytical views were shaped around the questions that matter most to the audience.</p></div>
-          <div className="detail-visual-grid">{visualDetails.map((item, i) => <div className="detail-visual-card" key={item.title}><span>{String(i + 1).padStart(2, '0')}</span><div className="detail-visual-icon"><BarChart3 /></div><strong>{item.title}</strong><p>{item.desc}</p></div>)}</div>
+          <div className="detail-visual-grid">{visualDetails.map((item, i) => <div className="detail-visual-card" data-reveal="pop" key={item.title}><span>{String(i + 1).padStart(2, '0')}</span><div className="detail-visual-icon"><BarChart3 /></div><strong>{item.title}</strong><p>{item.desc}</p></div>)}</div>
         </div>
         <aside className="detail-side-column">
-          <div className="detail-panel detail-objective-panel"><div className="detail-panel-heading"><Target /><span>Strategic objective</span></div><p>{objective}</p></div>
-          <div className="detail-panel detail-insights-panel"><div className="detail-panel-heading"><CheckCircle2 /><span>Key findings</span></div><div className="detail-insight-list">{insights.map((insight, i) => <div className="detail-insight" key={insight}><span>{String(i + 1).padStart(2, '0')}</span><p>{insight}</p></div>)}</div></div>
+          <div className="detail-panel detail-objective-panel" data-reveal="right"><div className="detail-panel-heading"><Target /><span>Strategic objective</span></div><p>{objective}</p></div>
+          <div className="detail-panel detail-insights-panel" data-reveal="right"><div className="detail-panel-heading"><CheckCircle2 /><span>Key findings</span></div><div className="detail-insight-list">{insights.map((insight, i) => <div className="detail-insight" key={insight}><span>{String(i + 1).padStart(2, '0')}</span><p>{insight}</p></div>)}</div></div>
         </aside>
       </section>
 
