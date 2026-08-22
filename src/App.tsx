@@ -27,6 +27,7 @@ import ProjectHealthcare from './components/ProjectHealthcare';
 import ProjectSupermarket from './components/ProjectSupermarket';
 import ProjectLookerStudio from './components/ProjectLookerStudio';
 import PROJECTADIDAS from './components/PROJECTADIDAS';
+import ProjectFootball from './components/ProjectFootball';
 import profileImage from './assets/unnamed.webp';
 import './App.css';
 
@@ -54,8 +55,20 @@ const navItems: { id: Exclude<Page, 'project-detail'>; label: string; icon: type
 
 const projects: Project[] = [
   {
-    id: 'healthcare-dash',
+    id: 'football-performance',
     number: '01',
+    title: 'Football Performance Analysis',
+    shortTitle: 'Player & market intelligence',
+    category: 'Football analytics',
+    description: 'An interactive Power BI dashboard connecting player performance, market value, clubs, leagues, and coaching context.',
+    image: '/project-images/football-cover-mixed.webp',
+    tools: ['Power BI', 'DAX', 'Power Query'],
+    result: '16K+ players analyzed',
+    accent: 'from-lime-400/80 to-emerald-700/80',
+  },
+  {
+    id: 'healthcare-dash',
+    number: '02',
     title: 'Healthcare Operations & Revenue',
     shortTitle: 'Clinical revenue intelligence',
     category: 'Healthcare analytics',
@@ -67,7 +80,7 @@ const projects: Project[] = [
   },
   {
     id: 'adidas-tableau',
-    number: '02',
+    number: '03',
     title: 'Adidas US Sales Analysis',
     shortTitle: 'Retail performance dashboard',
     category: 'Sales analytics',
@@ -79,7 +92,7 @@ const projects: Project[] = [
   },
   {
     id: 'supermarket',
-    number: '03',
+    number: '04',
     title: 'Global Sales Analysis',
     shortTitle: 'Supply chain visibility',
     category: 'Supply chain analytics',
@@ -91,7 +104,7 @@ const projects: Project[] = [
   },
   {
     id: 'looker',
-    number: '04',
+    number: '05',
     title: 'Game of Thrones Analysis',
     shortTitle: 'Narrative data exploration',
     category: 'Business intelligence',
@@ -216,6 +229,7 @@ function App() {
     if (selectedProject === 'supermarket') return <ProjectSupermarket {...detailNavigation} />;
     if (selectedProject === 'looker') return <ProjectLookerStudio {...detailNavigation} />;
     if (selectedProject === 'adidas-tableau') return <PROJECTADIDAS {...detailNavigation} />;
+    if (selectedProject === 'football-performance') return <ProjectFootball {...detailNavigation} />;
     return null;
   };
 
@@ -233,7 +247,7 @@ function App() {
               <button className="button-secondary" onClick={() => openExternal(cvUrl)}><Download className="h-4 w-4" /> Download CV</button>
             </div>
             <div className="hero-proof">
-              <div><strong>04</strong><span>Case studies</span></div>
+              <div><strong>05</strong><span>Case studies</span></div>
               <div><strong>03</strong><span>Core tools</span></div>
               <div><strong>01</strong><span>Question-first mindset</span></div>
             </div>

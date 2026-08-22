@@ -5,7 +5,7 @@ type Props = Pick<ProjectDetailProps, 'onBack' | 'onNext' | 'nextProject'>;
 
 export default function ProjectSupermarket(props: Props) {
   return <ProjectDetailLayout {...props}
-    index="03"
+    index="04"
     category="Supply chain analytics"
     badge="Global sales intelligence · Power BI"
     title="Global Sales Analysis"

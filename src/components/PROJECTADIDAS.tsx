@@ -5,7 +5,7 @@ type Props = Pick<ProjectDetailProps, 'onBack' | 'onNext' | 'nextProject'>;
 
 export default function ProjectAdidas(props: Props) {
   return <ProjectDetailLayout {...props}
-    index="02"
+    index="03"
     category="Sales analytics"
     badge="Retail performance · Tableau"
     title="Adidas US Sales Analysis"

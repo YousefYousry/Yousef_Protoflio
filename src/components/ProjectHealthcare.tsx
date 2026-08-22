@@ -5,7 +5,7 @@ type Props = Pick<ProjectDetailProps, 'onBack' | 'onNext' | 'nextProject'>;
 
 export default function ProjectHealthcare(props: Props) {
   return <ProjectDetailLayout {...props}
-    index="01"
+    index="02"
     category="Healthcare analytics"
     badge="Healthcare analytics · Power BI"
     title="Healthcare Operations & Revenue"

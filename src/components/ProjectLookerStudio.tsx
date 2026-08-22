@@ -5,7 +5,7 @@ type Props = Pick<ProjectDetailProps, 'onBack' | 'onNext' | 'nextProject'>;
 
 export default function ProjectLookerStudio(props: Props) {
   return <ProjectDetailLayout {...props}
-    index="04"
+    index="05"
     category="Business intelligence"
     badge="Narrative analytics · Looker Studio"
     title="Game of Thrones Analysis"
